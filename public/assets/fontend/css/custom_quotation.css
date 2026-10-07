@@ -1,0 +1,637 @@
+/* ======================================================
+   GLOBAL / UTILITIES
+   - คุมความกว้างภายใน, กันล้น, เกลี่ย spacing
+====================================================== */
+.radio-style-2-label{ margin:0 }
+
+.quote-type-scope,
+.form-scope{
+  width:100%;
+  margin:0 auto;
+  padding:10px 12px 0;     /* pt=10 ตามที่ขอ + px=12 กันชิดขอบ */
+  overflow-x:hidden;       /* กันองค์ประกอบภายในล้นแนวนอน */
+  box-sizing:border-box;
+}
+@media (min-width:1200px){
+  .quote-type-scope{ max-width:800px; }
+  .form-scope{ max-width:800px; }
+}
+
+/* ปิด negative gutter ของ .row ภายใน scope นี้ */
+.quote-type-scope .row,
+.form-scope .row{ margin-left:0 !important; margin-right:0 !important; }
+
+/* จำลอง gutter ด้วย padding ที่คอลัมน์ */
+.quote-type-scope [class^="col-"], .quote-type-scope [class*=" col-"],
+.form-scope [class^="col-"], .form-scope [class*=" col-"]{
+  padding-left:8px; padding-right:8px; box-sizing:border-box;
+}
+
+/* ให้ select2/คอมโพเนนต์ที่มัก fix width ขยายตามคอลัมน์ */
+.form-scope .select2-container{ width:100% !important; max-width:100%; }
+
+/* ======================================================
+   TYPE PICKER
+====================================================== */
+.type-picker.row{ flex-wrap:nowrap !important; margin-left:-6px; margin-right:-6px; }
+.type-picker .col-sm-6{ padding-left:6px; padding-right:6px; flex:0 0 50% !important; max-width:50% !important; }
+
+.type-picker .type-card{
+  width:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; padding:14px 10px;
+  background:#f6f7f9; border:1px solid #e3e6ea; border-radius:12px;
+  box-sizing:border-box;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  cursor:pointer; min-height:96px;
+}
+.type-picker .type-card i{ font-size:28px; line-height:1 }
+.type-picker .type-card .t-muted{ font-size:12px; color:#6b7280 }
+.type-picker .type-card strong{ font-size:13px }
+.type-picker .type-card:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.05); border-color:#d1d5db }
+.type-picker .type-card.active{ border-color:#0d6efd; box-shadow:0 0 0 3px rgba(13,110,253,.12) }
+
+@media (max-width:420px){
+  .type-picker .type-card{ padding:10px 8px; min-height:86px; }
+  .type-picker .type-card i{ font-size:24px; }
+  .type-picker .type-card .t-muted{ font-size:11px; }
+  .type-picker .type-card strong{ font-size:12px; }
+}
+
+/* ======================================================
+   FLOATING LABEL INPUTS
+====================================================== */
+.fl-group{ position:relative; margin-bottom:18px }
+.fl-group input,
+.fl-group textarea,
+.fl-group select{
+  width:100%;
+  border:1px solid #ced4da; border-radius:6px;
+  padding:16px 12px 12px; background:#fff; font-size:14px;
+  box-sizing:border-box;
+}
+.fl-group textarea{ min-height:120px; resize:vertical }
+
+.fl-group label{
+  position:absolute; top:14px; left:12px; font-size:14px; color:#6c757d;
+  pointer-events:none; transition:all .18s ease; background:#fff; padding:0 6px; z-index:1;
+}
+.fl-group:focus-within label,
+.fl-group.filled label,
+.fl-group input:not(:placeholder-shown)+label,
+.fl-group textarea:not(:placeholder-shown)+label{
+  transform:translateY(-20px) scale(.86);
+  color:#0d6efd;
+}
+/* error states */
+.fl-group.is-invalid input,
+.fl-group.is-invalid textarea,
+.fl-group.is-invalid select{ border-color:#dc3545 }
+.invalid-feedback{ display:block; color:#dc3545; margin-top:4px }
+
+@media (min-width:1200px){
+  /* ย่อขนาดบน desktop ให้กระชับกว่า mobile นิดหน่อย */
+  .form-scope .fl-group input,
+  .form-scope .fl-group textarea,
+  .form-scope .fl-group select{
+    padding:10px 12px 8px; font-size:13px;
+  }
+}
+
+/* ======================================================
+   CART TABLE (ไม่มีคอลัมน์ “รวม”)
+====================================================== */
+.cart-table th, .cart-table td{ vertical-align:middle; }
+.order-img-xs{ max-width:80px; height:auto; border-radius:8px; }
+.amount-sale{ color:#e11d48; }  /* สีแดงนุ่มกว่าหน่อย */
+
+/* ---------- Mobile: แปลงเป็น card-mode, ห้ามล้น --------- */
+@media (max-width:767.98px){
+  /* ไม่บังคับให้เกิดสกรอลล์แนวนอน */
+  .table-responsive{ overflow-x:visible; }
+
+  .cart-table{
+    width:100% !important;
+    table-layout:fixed;           /* บังคับห่อคำยาว/SKU */
+  }
+
+  .cart-table thead{ display:none; }
+
+  .cart-table tr{
+    display:block;
+    border:1px solid #e3e6ea; border-radius:12px;
+    padding:12px; margin-bottom:12px; background:#fff;
+  }
+
+  .cart-table td{
+    display:grid;                 /* ใช้ grid เพื่อไม่ดันล้นเหมือน flex */
+    grid-template-columns:1fr;
+    align-items:start;
+    gap:6px;
+    padding:8px 0 !important;
+    border:0 !important;
+    width:100%; max-width:100%;
+    overflow:hidden;
+    word-break:break-word;
+    overflow-wrap:anywhere;
+  }
+  .cart-table td::before{
+    content:attr(data-label);
+    font-weight:600; color:#6b7280; line-height:1.3;
+    display:block; margin-bottom:2px;
+  }
+
+  .order-img-xs{ max-width:100px; }
+
+  /* ราคาอยู่บรรทัดใหม่และชิดซ้าย */
+  .cart-table .cart-product-price,
+  .cart-table .text-right{ text-align:left !important; }
+
+  /* จำนวน: ปุ่มสัมผัสง่าย ไม่ล้น */
+  .cart-table [data-label="จำนวน"] .quantity{
+    margin-left:0; justify-content:flex-start; width:100%;
+  }
+}
+
+/* ======================================================
+   QUANTITY (เวอร์ชันไร้กรอบ)
+====================================================== */
+.qty-inline{ display:inline-flex; align-items:center; gap:6px; }
+.qty-inline.qty-naked{ border:none; padding:0; gap:10px; }
+.qty-inline.qty-naked .minus,
+.qty-inline.qty-naked .plus{
+  appearance:none; border:none; background:transparent;
+  width:28px; height:28px; line-height:28px;
+  text-align:center; border-radius:6px; font-size:18px; cursor:pointer;
+}
+.qty-inline.qty-naked .minus:hover,
+.qty-inline.qty-naked .plus:hover{ background:#f5f6f7; }
+.qty-inline.qty-naked .qty{
+  border:none; background:transparent; width:40px; min-width:40px;
+  padding:0; border-radius:0; box-shadow:none;
+  text-align:center; font-size:16px;
+}
+@media (max-width:767.98px){
+  .qty-inline.qty-naked{ gap:8px; }
+  .qty-inline.qty-naked .qty{ width:48px; min-width:48px; }
+  .qty-inline.qty-naked .minus,
+  .qty-inline.qty-naked .plus{ width:32px; height:32px; line-height:32px; }
+}
+
+/* ======================================================
+   CART SUMMARY
+====================================================== */
+.cart-summary{
+  display:flex; justify-content:flex-end; margin-top:16px;
+}
+.cart-summary .summary-row{
+  display:flex; gap:18px; align-items:center;
+  padding:12px 16px;
+  border:1px solid #e3e6ea; border-radius:10px; background:#fafbfc;
+}
+.cart-summary .label{ color:#6b7280; }
+.cart-summary .value{ font-weight:600; }
+
+@media (max-width:767.98px){
+  .cart-summary{ justify-content:stretch; }
+  .cart-summary .summary-row{ width:100%; justify-content:space-between; }
+}
+
+/* กันเคสองค์ประกอบบางตัวตั้ง min-width เองจนดันล้น */
+.cart-table img,
+.cart-table input,
+.cart-table select,
+.cart-table button{ max-width:100%; }
+
+.is-hidden{ display:none !important; }
+
+/* === Push text baseline down a bit (ไม่ชน label) === */
+.form-scope .fl-group input,
+.form-scope .fl-group select{
+  /* เดิมที่เพิ่งตั้งไว้: 17px 12px 14px */
+  padding-top: 20px;   /* ↓ ดันตัวอักษรลงอีก ~3px */
+  padding-bottom: 12px;
+}
+
+/* ยก label ตอนลอยให้สูงขึ้นอีกนิด เพื่อเว้นช่องไฟระหว่าง label กับข้อความ */
+.form-scope .fl-group:focus-within label,
+.form-scope .fl-group.filled label,
+.form-scope .fl-group input:not(:placeholder-shown)+label,
+.form-scope .fl-group textarea:not(:placeholder-shown)+label{
+  transform: translateY(-24px) scale(.84); /* เดิม -20px scale(.86) */
+}
+
+/* Desktop ก็ขยับลงเล็กน้อยให้บาลานซ์ */
+@media (min-width:1200px){
+  .form-scope .fl-group input,
+  .form-scope .fl-group select{
+    /* เดิม: 11px 12px 10px */
+    padding-top: 14px;  /* ↓ ลงอีก ~3px */
+    padding-bottom: 10px;
+  }
+
+  .form-scope .fl-group:focus-within label,
+  .form-scope .fl-group.filled label,
+  .form-scope .fl-group input:not(:placeholder-shown)+label,
+  .form-scope .fl-group textarea:not(:placeholder-shown)+label{
+    transform: translateY(-22px) scale(.84);
+  }
+}
+
+/* (ถ้าใช้ Select2) ขยับตำแหน่งข้อความในกล่องเลือกให้ลงตามด้วย */
+.form-scope .select2-container--default .select2-selection--single{
+  height: auto;                /* ให้สูงตาม padding */
+  padding: 10px 12px;          /* ระยะในกล่อง select2 */
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  background: #fff;
+}
+.form-scope .select2-container--default .select2-selection--single .select2-selection__rendered{
+  padding-left: 0;             /* ใช้ padding ของกล่องแทน */
+  margin-top: 2px;             /* ดัน baseline ลงอีกนิด */
+}
+.form-scope .select2-container--default .select2-selection--single .select2-selection__arrow{
+  height: 100%;
+}
+
+/* ลอย label เมื่อ select2 โฟกัสหรือเปิด dropdown */
+.form-scope .fl-group .select2-container--focus ~ label,
+.form-scope .fl-group .select2-container--open  ~ label,
+.form-scope .fl-group.filled label{
+  transform: translateY(-24px) scale(.84); /* ลอยสูงกว่าปกติเล็กน้อย กันชน */
+  color:#0d6efd;
+}
+
+/* สูงของกล่อง select2 + baseline ตัวอักษรให้เหมือน input */
+.form-scope .select2-container--default .select2-selection--single{
+  min-height: 44px;               /* ให้พอ ๆ กับ input ที่เราเพิ่ม padding */
+  border:1px solid #ced4da;
+  border-radius:6px;
+  padding: 10px 36px 10px 12px;   /* ชิดซ้ายพอดี และเผื่อพื้นที่ลูกศรด้านขวา */
+  background:#fff;
+  box-sizing: border-box;
+}
+.form-scope .select2-container--default
+.select2-selection--single .select2-selection__rendered{
+  line-height: 22px;              /* baseline สบายตา ไม่ชน label */
+  padding-left: 0;                /* ใช้ padding ของกล่องแทน */
+  margin-top: 2px;
+}
+.form-scope .select2-container--default
+.select2-selection--single .select2-selection__arrow{
+  height: 100%;
+  right: 8px;
+}
+/* === Select2: make height match text inputs (floating-label friendly) === */
+
+/* ค่าพื้นฐานเดียวกับ input ทั่วไป (อยากปรับความสูงรวม เปลี่ยน padding ได้ตรงนี้) */
+:root{
+  --fld-pad-y: 16px;   /* top/bottom ของมือถือ */
+  --fld-pad-x: 12px;
+  --fld-pad-y-desktop: 10px; /* desktop กระชับลง */
+}
+
+/* กล่อง select2 เดียวกับ input */
+.form-scope .select2-container--default .select2-selection--single{
+  min-height: calc((var(--fld-pad-y) * 2) + 20px); /* 20px ≈ line-height เนื้อหา */
+  padding: var(--fld-pad-y) calc(var(--fld-pad-x) + 24px) var(--fld-pad-y) var(--fld-pad-x);
+  /*         ^ เผื่อพื้นที่ลูกศร +24px                              ^ ขอบซ้าย */
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* ข้อความที่แสดงผลให้กดลงมาหน่อย จะไม่ชน label */
+.form-scope .select2-container--default
+.select2-selection--single .select2-selection__rendered{
+  margin: 0;               /* รีเซ็ต margin เดิมของธีม */
+  line-height: 20px;       /* คุม baseline ให้คงที่ */
+  padding-left: 0;         /* ใช้ padding ของกล่องแทน */
+}
+
+/* ลูกศรชิดขวา และสูงเต็มกล่อง */
+.form-scope .select2-container--default
+.select2-selection--single .select2-selection__arrow{
+  height: 100%;
+  right: 8px;
+}
+
+/* โฟกัส */
+.form-scope .select2-container--default.select2-container--focus
+.select2-selection--single{
+  outline: 0;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 3px rgba(13,110,253,.12);
+}
+
+/* Desktop ให้สูงเท่าช่องกรอกฝั่ง desktop ของคุณ */
+@media (min-width:1200px){
+  .form-scope .select2-container--default .select2-selection--single{
+    min-height: calc((var(--fld-pad-y-desktop) * 2) + 20px);
+    padding-top: var(--fld-pad-y-desktop);
+    padding-bottom: var(--fld-pad-y-desktop);
+  }
+}
+
+/* ให้ label ลอยเมื่อ select2 โฟกัส/เปิด หรือมีค่า (เข้ากับระบบ .filled ที่คุณทำไว้) */
+.form-scope .fl-group .select2-container--open  ~ label,
+.form-scope .fl-group .select2-container--focus ~ label,
+.form-scope .fl-group.filled label{
+  transform: translateY(-24px) scale(.84);
+  color:#0d6efd;
+}
+/* Force the selection box to match our inputs using flex centering */
+.form-scope .select2-container--default .select2-selection--single{
+  display:flex; align-items:center;           /* align text vertically */
+  padding:0 36px 0 12px;                      /* เผื่อพื้นที่ลูกศรขวา */
+  border:1px solid #ced4da; border-radius:6px;
+  background:#fff; box-sizing:border-box;
+}
+.form-scope .select2-container--default
+.select2-selection--single .select2-selection__rendered{
+  padding:0; margin:0; line-height:normal;    /* ไม่ให้ line-height ไปดันความสูง */
+}
+.form-scope .select2-container--default
+.select2-selection--single .select2-selection__arrow{
+  height:100%; right:8px;
+}
+
+/* Floating label when Select2 is focused/open/has value */
+.form-scope .fl-group .select2-container--open  ~ label,
+.form-scope .fl-group .select2-container--focus ~ label,
+.form-scope .fl-group.filled label{
+  transform: translateY(-24px) scale(.84);
+  color:#0d6efd;
+}
+/* ===== Unified field height (mobile/desktop) ===== */
+:root{
+  --fld-h: 48px;            /* ความสูงรวมบนมือถือ */
+  --fld-h-desktop: 44px;    /* ความสูงรวมบน desktop */
+  --fld-pad-x: 12px;        /* padding ซ้าย/ขวา */
+}
+
+/* ให้ input/select ธรรมดาอย่างน้อยสูงเท่านี้ (ยังคง floating-label เดิมได้) */
+.form-scope .fl-group input,
+.form-scope .fl-group select:not(.select2-hidden-accessible){
+  min-height: var(--fld-h);
+  box-sizing: border-box;
+}
+
+/* ---- Select2: บังคับเท่าช่องกรอกทุกประการ ---- */
+.form-scope .fl-group .select2-container--default .select2-selection--single{
+  height: var(--fld-h) !important;
+  min-height: var(--fld-h) !important;
+  box-sizing: border-box;
+  display: flex; align-items: center;
+  padding: 0 calc(var(--fld-pad-x) + 24px) 0 var(--fld-pad-x); /* เว้นที่ลูกศร */
+  border: 1px solid #ced4da; border-radius: 6px; background: #fff;
+  font-size: 14px; line-height: 1.4;
+}
+.form-scope .fl-group .select2-container--default
+.select2-selection--single .select2-selection__rendered{
+  margin: 0 !important; padding: 0 !important; line-height: 1.4 !important;
+}
+.form-scope .fl-group .select2-container--default
+.select2-selection--single .select2-selection__arrow{
+  height: 100% !important; right: 8px; /* ติดขอบขวาพอดี */
+}
+
+/* Floating label ของ select2 (เข้ากับระบบ .filled เดิม) */
+.form-scope .fl-group .select2-container--open  ~ label,
+.form-scope .fl-group .select2-container--focus ~ label,
+.form-scope .fl-group.filled label{
+  transform: translateY(-24px) scale(.84);
+  color:#0d6efd;
+}
+
+/* Desktop: ลดความสูงลงตามตัวแปร */
+@media (min-width:1200px){
+  .form-scope .fl-group input,
+  .form-scope .fl-group select:not(.select2-hidden-accessible){
+    min-height: var(--fld-h-desktop);
+  }
+  .form-scope .fl-group .select2-container--default .select2-selection--single{
+    height: var(--fld-h-desktop) !important;
+    min-height: var(--fld-h-desktop) !important;
+  }
+}
+/* === Force input text height = 40px (all devices) + keep floating label lift === */
+
+/* กำหนด target เฉพาะ input ประเภทข้อความ ไม่ยุ่ง checkbox/radio/file/date ฯลฯ */
+.form-scope .fl-group input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):not([type="date"]):not([type="datetime-local"]):not([type="month"]):not([type="time"]):not([type="week"]) {
+  height: 43px !important;     /* ความสูงรวมเท่ากันทุกอุปกรณ์ */
+  min-height: 43px !important;
+  padding: 12px 12px 10px;      /* เว้นระยะด้านบนพอให้ label ซ้อนแล้วอ่านง่าย */
+  box-sizing: border-box;
+}
+
+.form-scope .fl-group select:not(.select2-hidden-accessible) {
+  height: 43px !important;
+  min-height: 43px !important;
+  padding: 8px 12px;            /* ปรับ padding ให้พอดี 40px */
+  box-sizing: border-box;
+}
+
+/* Select2 ให้สูง 40px ให้ตรงกับ input ด้วย */
+.form-scope .fl-group .select2-container--default .select2-selection--single{
+  height: 43px !important;
+  min-height: 43px !important;
+  display: flex; align-items: center;
+  padding: 0 36px 0 12px;       /* เว้นลูกศรด้านขวา */
+  box-sizing: border-box;
+}
+.form-scope .fl-group .select2-container--default
+.select2-selection--single .select2-selection__rendered{
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* ยก label ตอนลอยเพิ่ม +3px จากเดิม (เช่น -24px → -27px) */
+.form-scope .fl-group:focus-within label,
+.form-scope .fl-group.filled label,
+.form-scope .fl-group input:not(:placeholder-shown)+label,
+.form-scope .fl-group textarea:not(:placeholder-shown)+label{
+  transform: translateY(-27px) scale(.84);
+}
+
+/* กรณี Select2 โฟกัส/เปิด/มีค่า ก็ยกเท่ากัน */
+.form-scope .fl-group .select2-container--open  ~ label,
+.form-scope .fl-group .select2-container--focus ~ label,
+.form-scope .fl-group.filled label{
+  transform: translateY(-27px) scale(.84);
+}
+.is-hidden{ display:none !important; }
+
+/* ========== CART: Mobile card layout (XS only) ========== */
+@media (max-width: 575.98px){ /* ต่ำกว่า sm ของ Bootstrap */
+  /* ปิดหัวตาราง และกัน overflow */
+  .cart-table thead{ display:none; }
+  .table-responsive{ overflow-x: visible; }
+
+  /* ทำแถวตารางให้เป็นการ์ด */
+  .cart-table tr{
+    display: grid;
+    grid-template-columns: 84px 1fr;               /* ซ้าย=รูป ขวา=ข้อมูล */
+    grid-template-areas:
+      "thumb info"
+      "qty   qty"
+      "price price";
+    gap: 10px 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    background: #fff;
+  }
+  .cart-table td{
+    padding: 0 !important;
+    border: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  /* ไม่ต้องโชว์หัวคอลัมน์จำลอง */
+  .cart-table td::before{ display:none; }
+
+  /* map พื้นที่ */
+  .cart-table td[data-label="#"]{ grid-area: thumb; }
+  .cart-table td[data-label="รายละเอียดสินค้า"]{ grid-area: info; }
+  .cart-table td[data-label="จำนวน"]{
+    grid-area: qty;
+    padding-top: 6px !important;
+    margin-top: 2px;
+    border-top: 1px solid #eef1f4 !important;
+  }
+  .cart-table td[data-label="ราคา"],
+  .cart-table .cart-product-price{
+    grid-area: price;
+    text-align: right !important;
+    padding-top: 4px !important;
+    border-top: 1px solid #eef1f4 !important;
+    font-weight: 600;
+  }
+
+  /* รูปสินค้า */
+  .order-img-xs{
+    width: 84px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* ข้อความรายละเอียดกระชับ และไม่ล้น */
+  .cart-table td[data-label="รายละเอียดสินค้า"] small{
+    color:#6b7280; display:block; margin-bottom:4px;
+    word-break: break-word;
+  }
+  .cart-table td[data-label="รายละเอียดสินค้า"] br{ display:none; } /* ให้เป็นย่อหน้าเดียว */
+  .cart-table td[data-label="รายละเอียดสินค้า"]{
+    line-height: 1.35;
+  }
+
+  /* จำนวน: ปุ่มสัมผัสง่าย ไม่กระเด็น */
+  .qty-inline.qty-naked{
+    justify-content: space-between; gap: 10px;
+    width: 100%;
+  }
+  .qty-inline.qty-naked .minus,
+  .qty-inline.qty-naked .plus{
+    width: 36px; height: 36px; line-height: 36px; font-size: 18px;
+    border-radius: 8px;
+  }
+  .qty-inline.qty-naked .qty{
+    width: 56px; min-width:56px; font-size: 16px;
+  }
+
+  /* ราคา: ให้สกุลเงินขึ้นบรรทัดเดียวกัน สบายตา */
+  .cart-table .cart-product-price .currency{ margin-left: 4px; color:#6b7280; font-weight: 500; }
+
+  /* กันองค์ประกอบภายในตั้ง min-width เองจนดันล้น */
+  .cart-table img,
+  .cart-table input,
+  .cart-table select,
+  .cart-table button{ max-width:100%; }
+}
+/* Mobile: keep - [qty] + on one row (no wrap) */
+@media (max-width: 575.98px){
+  /* กล่องจำนวนให้เป็นแนวนอน ชิดกลาง แถวเดียว */
+  .cart-table td[data-label="จำนวน"] .quantity,
+  .qty-inline.qty-naked{
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;   /* เปลี่ยนเป็น flex-start ถ้าอยากชิดซ้าย */
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* ปุ่ม - / + แตะง่ายพอดีมือ */
+  .qty-inline.qty-naked .minus,
+  .qty-inline.qty-naked .plus{
+    width: 36px; height: 36px; line-height: 36px; font-size: 18px;
+    border-radius: 8px;
+  }
+
+  /* ช่องจำนวนให้กว้าง 80px และ (ตามที่ขอก่อนหน้า) ตัวเลขชิดขวา */
+  .qty-inline .qty,
+  .qty-inline.qty-naked .qty{
+    width: 80px !important;
+    min-width: 80px !important;
+    text-align: center !important;   /* เปลี่ยนเป็น center ถ้าชอบกึ่งกลาง */
+    margin: 0;
+  }
+  table.cart .quantity .qty{
+	  border-top: 0;
+	  border-bottom: 0;
+  }
+  table.cart .quantity .qty, table.cart .quantity .plus, table.cart .quantity .minus{
+	  width: auto;
+  }
+}
+/* ===== Submit Lock & Overlay ===== */
+.btn[disabled], .button[disabled]{
+  opacity:.7; cursor:not-allowed !important; filter:saturate(.6);
+}
+
+.btn.is-loading, .button.is-loading{
+  position:relative; pointer-events:none;
+}
+.btn.is-loading .btn-text, .button.is-loading .btn-text{ visibility:hidden; }
+.btn.is-loading::after, .button.is-loading::after{
+  content:""; position:absolute; inset:0; margin:auto;
+  width:18px; height:18px; border-radius:50%;
+  border:2px solid currentColor; border-right-color:transparent;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg) } }
+
+/* Full-screen overlay while submitting */
+#submit-overlay[hidden]{ display:none !important; }
+#submit-overlay{
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(255,255,255,.85); backdrop-filter:blur(3px) saturate(1.2);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  padding:24px;
+}
+.submit-box{
+  max-width:560px; width:100%;
+  background:#fff; border:1px solid #eef1f4; border-radius:16px;
+  padding:22px 18px; box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+.submit-box .lead{
+  margin-top:10px; color:#4b5563; line-height:1.55;
+}
+.submit-spinner{
+  display:inline-block; width:28px; height:28px; vertical-align:middle;
+  border-radius:50%; border:3px solid #111; border-right-color:transparent;
+  animation:spin .9s linear infinite; margin-right:8px;
+}
+/* ระหว่างส่งฟอร์ม: บล็อกการคลิก โดยไม่ตัดค่าฟิลด์ออกจากการ submit */
+.form-scope.is-busy { pointer-events: none; }
+.form-scope.is-busy input,
+.form-scope.is-busy select,
+.form-scope.is-busy textarea { caret-color: transparent; }

@@ -1,0 +1,1 @@
+<a href="{{ route('quotation.preview',['id' => $id]) }}" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>

@@ -1,0 +1,27 @@
+.autocomplete {
+  position: relative;
+}
+
+#matchList {
+  position: absolute;
+  z-index: 99;
+  background-color: white;
+  left: 0;
+  right: 0;
+  /* vertical scroll bar */
+  max-height: 350px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
+
+#matchList:hover {
+  cursor: pointer;
+}
+
+li > span {
+  pointer-events: none;
+}
+.w3-large {
+    font-size: 14px!important;
+}

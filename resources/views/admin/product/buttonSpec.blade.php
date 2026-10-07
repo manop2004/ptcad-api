@@ -1,0 +1,1 @@
+<a class="btn btn-danger btn-link btn-icon remove" href="#" data-toggle="modal" data-target="#deleteSpec" onclick="deleteModal(this)" href="#" data-id="{{ $id }}" data-name="{{ $name }}"><i class="fa fa-times"></i></a>

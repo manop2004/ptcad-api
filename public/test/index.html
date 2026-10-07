@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue</title>
+    <meta property="og:title" content="ขอใบเสนอราคา SOLIDWORKS" class="yoast-seo-meta-tag">
+    <script src="https://api.applicadthai.com/assets/trackingParamsCookie.js?v=1.0" async></script>
+    <style>
+
+    </style>
+
+    <script type="module" crossorigin src="https://api.applicadthai.com/assets/dynamicForm.js"></script>
+    <link rel="stylesheet" crossorigin href="https://api.applicadthai.com/assets/dynamicForm.css">
+</head>
+
+<body>
+
+    <!-- Removed duplicate body tag -->
+    <!-- <div class="max-w-7xl mx-auto p-4 bg-gray-600 text-white">
+      <a href="https://api.applicadthai.com/test.html" class="text-sky-400">Link 1</a>
+      <a href="" class="">Link 2</a>
+      <a href="">Link 3</a>
+      <a href="">Link 4</a>
+    </div> -->
+
+    <div id="dynamicForm" data-theme="blue"></div> <!-- Use data-theme directly -->
+
+
+    <script>
+        window.formData = {
+            formType: "test",
+            // formType: "quotation",
+            // formType: "download",
+            // formType: "test",
+            // formType: "demo",
+            // ทำ Request Demo ไว้รองรับอนาคต
+            // request_demo : 'online',
+            // request_demo : 'onsite',
+            // formType: "promotion",
+            // Seminar Online and onsite with Detail
+            // formType: "seminar_online",
+            // seminar_online_live: "https://www.applicadthai.com/live/applicad-bim-solution-2025/",
+            // formType: "seminar_onsite",
+            // seminar_onsite_banner_url: "https://3dx.applicadthai.com/2024/images/Preview_3DX2025-Mail.png",
+            // seminar_onsite_event_name: "AppliCAD's 3DEXPERIENCE WORK DAY 2025",
+            // seminar_onsite_location: "@BITEC BANGNA - BHIRAJ HALL 1",
+            // seminar_onsite_datetime: "October 17, 2024 | 13:00 - 17:00 (UTC+7)",
+
+            // Seminar Hybrid ต้องใส่ข้อมูลทั้ง Online และ onsite ซึ่ง User สามารถเลือกได้ว่า จะลง Online หรือ onsite และจะแยก CampaignId ต้องใส่ทั้ง 2 เลข
+            // formType: "seminar_hybrid",
+            // seminar_hybrid_campaignId_online: "2382127",
+            // seminar_hybrid_campaignId_onsite: "2382131",
+            // seminar_hybrid_live: "https://www.applicadthai.com/live-swid2026/",
+            // seminar_hybrid_banner_url: "https://www.applicadthai.com/wp-content/uploads/2025/08/Solidworks-innovation-day-2026-for-mail.png",
+            // seminar_hybrid_event_name: "SOLIDWORKS Innovation Day 2026",
+            // seminar_hybrid_location: "BHIRAJ HALL 1 @BITEC BANGNA",
+            // seminar_hybrid_datetime: "October 17, 2025 | 13:00 - 17:00 (UTC+7)",
+
+            // formType: "webinar",
+            // formType: "survey",
+            // formType: "other",
+            // formType: "rerun",
+            // formType: "custom",
+
+            // ถ้าเป็น seminar_hybrid ไม่ต้องใส่ campaignId 
+            campaignId: "52735",
+
+            // productName คือ เงื่อนไข switch case ที่เคยใช้ ใน webform เก่า
+            // productName: "TesT",
+            // productName: "Test-PDPA",
+            // email_subject: "ทดสอบส่งข้อมูลจากฟอร์ม",
+            additionalText: '<div class="my-1 px-1 text-red-500"><h1>กรุณากรอกข้อมูลให้ครบถ้วน</h1></div>',
+            additional_condition: 'swid2026',
+            mail_staff: [
+                "wathit.pm@gmail.com",
+            ],
+            // mail_cc: [
+            //   "wathit.pm@gmail.com",
+            //   "wathit.pm+1@gmail.com",
+            //   "wathit.pm+2@gmail.com"
+            // ],
+            // more_details: "รับชมรีรันได้แล้วตอนนี้ : https://www.youtube.com/live/A81rH_12Io4",
+            // --- ส่วนฟิลด์ที่ต้องการสร้างแบบ Dynamic ---
+            // dynamicFields: [
+            //   {
+            //     type: 'select',        // ประเภทของ Input ('select', 'text', 'textarea', 'checkbox', etc.)
+            //     name: 'custom_question_1', // **สำคัญ:** ชื่อ Key ที่ไม่ซ้ำกัน สำหรับ v-model และส่งข้อมูล
+            //     label: "คำถามแบบเลือกตอบ", // ป้ายกำกับที่จะแสดง
+            //     options: [             // ตัวเลือก (สำหรับ type: 'select' เท่านั้น)
+            //       { label: "คำตอบ A", value: "A" }, // ควรใช้ label/value
+            //       { label: "คำตอบ B", value: "B" },
+            //       { label: "คำตอบ C", value: "C" },
+            //       { label: "คำตอบ D", value: "D" },
+            //     ],
+            //     //   required: false,       // ฟิลด์นี้จำเป็นต้องกรอกหรือไม่  
+            //     //   group: 'description', // กลุ่มที่จะแสดง (สำหรับการจัดกลุ่มฟิลด์)
+            //     //   // props: { placeholder: '...' } // สามารถใส่ props เพิ่มเติมได้ (เช่น placeholder)
+            //   },
+            //   {
+            //     type: 'text',          // ประเภท Input
+            //     name: 'custom_feedback', // **สำคัญ:** ชื่อ Key ที่ไม่ซ้ำกัน
+            //     label: "ความคิดเห็นเพิ่มเติม", // ป้ายกำกับ
+            //     // props: { placeholder: 'กรอกความคิดเห็น...' }, // Placeholder
+            //     required: false,
+            //     group: 'description', // กลุ่มที่จะแสดง (สำหรับการจัดกลุ่มฟิลด์)
+
+            //   },
+            // {
+            //   type: 'textarea',      // ประเภท Input
+            //   name: 'custom_details',  // **สำคัญ:** ชื่อ Key ที่ไม่ซ้ำกัน
+            //   label: "รายละเอียด",     // ป้ายกำกับ
+            //   required: true,
+            //   group: 'description', // กลุ่มที่จะแสดง (สำหรับการจัดกลุ่มฟิลด์)
+            //   // props: { placeholder: 'กรอกรายละเอียด...' }, // Placeholder
+            // },
+            // {
+            //   type: 'checkbox',
+            //   name: 'custom_checkbox',
+            //   label: 'Checkbox Field',
+            //
+            //   options: [
+            //     { label: 'Option 1', value: 'option1' },
+            //     { label: 'Option 2', value: 'option2' },
+            //     { label: 'Option 3', value: 'option3' },
+            //     { label: 'Option 4', value: 'option4' },
+            //   ],
+            //   required: true,
+            //   group: 'description', // กลุ่มที่จะแสดง (สำหรับการจัดกลุ่มฟิลด์)
+            //   // ... สามารถเพิ่มฟิลด์อื่นๆ ตามต้องการ ...
+            // }
+
+
+            // ] // < Close Tag dynamicFields >
+
+        };
+    </script>
+
+</body>
+
+</html>

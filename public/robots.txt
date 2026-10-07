@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /setting
+Disallow: /home
+Disallow: /order
+Disallow: /type
+Disallow: /history
+Disallow: /banner
+Disallow: /promotion
+Disallow: /ticket
+Disallow: /getmember
+Disallow: /recommend
+Disallow: /popup
+Disallow: /custom
+Sitemap: https://8baht.com/sitemap.xml

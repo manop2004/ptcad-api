@@ -1,0 +1,26 @@
+Options -Indexes
+DirectoryIndex index.php
+
+# Route ทุก request ผ่าน index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# ปิดการเข้าถึงไฟล์ sensitive
+<FilesMatch "(config\.php|\.env|\.gitignore)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ปิดการเข้าถึง storage
+<IfModule mod_rewrite.c>
+    RewriteRule ^storage/ - [F,L]
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "no-referrer"
+</IfModule>

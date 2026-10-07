@@ -1,0 +1,1196 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+html,body {
+    padding: 0;
+  min-height:100%;
+  height:100%;
+  font-family: "Noto Sans Thai", sans-serif;
+  font-weight:200;
+  &.modal-active {
+    overflow: hidden;
+  }
+}
+
+
+/* 1ชุด modal login by sosocial  start */
+.modal-loginbysosocial {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0; 
+  z-index: 4;
+  transform: scale(0);
+
+  &.one {
+    
+    transform: scaleY(.01) scaleX(0);
+    animation: unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+    .modal-background {
+      .modal {
+        transform: scale(0);
+        animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      }
+    }
+
+    &.out {
+      transform: scale(1);
+      animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+      .modal-background {
+        .modal {
+          animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        }
+      }
+    }
+  }
+
+  &.loginbysosocial {
+    transform: scale(1) !important;
+
+    .modal-background {
+      background: rgba(0, 0, 0, 0.0);
+      animation: fadeIn .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+      .modal {
+        background-color: transparent;
+        animation: modalFadeIn .3s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+        h2, .pulldowe {
+          opacity: 0;
+          position: relative;
+          animation: modalContentFadeIn .3s 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        }
+
+        .modal-svg {
+          rect {
+            animation: sketchIn .5s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+          }
+        }
+      }
+    }
+
+    &.out {
+      animation: quickScaleDown 0s .5s linear forwards;
+
+      .modal-background {
+        animation: fadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+        .modal {
+          animation: modalFadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
+          h2, .pulldowe {
+            animation: modalContentFadeOut .2s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+          }
+
+          .modal-svg {
+            rect {
+              animation: sketchOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+  
+  
+  /* 1ชุด modal reg  end */
+  .modal-background {
+    display:table-cell;
+    background:rgba(0,0,0,.8);
+    text-align:center;
+    vertical-align:middle;
+    z-index: 0;
+    .modal {
+        font-family: "Noto Sans Thai", sans-serif;
+      width: 492px;
+      background:white;
+      padding:10px;
+      display:inline-block;
+      border-radius:20px;
+      font-weight:300;
+      position:relative;
+
+      /* <!-- line out bordering and plz dont delete  --> */
+      .modal-svg {
+        position:absolute;
+        top:0;
+        left:0;
+        z-index: 0;
+        height:100%;
+        width:100%;
+        border-radius:20px;
+        rect {
+          stroke: #fff;
+          stroke-width: 2px;
+          stroke-dasharray: 778;
+          stroke-dashoffset: 778;
+        }
+        
+      }
+   
+  
+  }
+}
+/* // end login by sosocial */
+      /* สร้างclass ในนี้ค่ะเพื่อซ่อน divทั้งหมด  */
+      .modalcontentreglogin{
+        display: flex; 
+        border-radius: 20px;
+        align-items: center;
+        position: relative;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 2;
+    }
+    .modal-coverclose{
+        display: flex;
+        width: 100%;
+        height: 40px;
+        justify-content: end;
+    }
+    .modal-closereg{
+        width: 32px;
+        height: 32px; 
+        cursor: pointer !important;
+    }
+    .modal-iconloginreg{
+        width: 24px;
+        height: 24px; 
+    }
+    .coverbtureglogin-wh{
+        padding: 0 24px; display: flex; align-items: center;
+        height: 48px;
+        gap: 12px;
+        cursor: pointer;
+        margin-bottom: 12px;
+        justify-content: center;
+        border-radius: 100px; 
+        background-color: #1877F2;
+        display: flex;
+    }
+    .coverbtureglogin-green{
+        padding: 0 24px; display: flex; align-items: center;
+        height: 48px;
+        gap: 12px;
+        cursor: pointer;
+        justify-content: center;
+        margin-bottom: 12px;
+        border-radius: 100px; 
+        background-color: #00C300;
+        display: flex;
+    }
+    .txtbtureglogin-wh{
+        font-size: 16px; font-weight: 400; color: white;
+    }
+    .txtbtureglogin-bl{
+        font-size: 16px; font-weight: 400;       color: #111827;
+    }
+    .coverbtureglogin-bl{
+        padding: 0 24px; display: flex; align-items: center;
+        height: 47px;
+        gap: 12px;
+        justify-content: center;
+        cursor: pointer;
+        color: #111827;
+        margin-bottom: 12px;
+        border-radius: 100px; 
+        background-color: white;
+        display: flex;
+        border: 1px solid #D1D5DB;
+    }
+    .txtcoverwelcom{
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        padding-bottom: 9px;
+        color: black;
+    }
+    .coverlogologin{
+        width: 200px;
+         background-repeat: no-repeat;
+         background-size: contain;
+        height: 90px; 
+        background-image: url(/assets/fontend/hax_theme/images/logowhenreglogin.webp);
+    }
+    .boxmidreglo00{
+        display: flex;  width: calc(100% - 24px); flex-direction: column
+    }
+    .boxmidreglo01{
+        width: 75%;display: flex; gap: 12px; align-items: center; margin-bottom: 12px;    
+    }
+    .boxmidreglo02{
+        display: flex; padding-bottom: 10px;   width: calc(100% - 24px);flex-direction: column;
+    }
+    .sub-boxmidreglo0201{
+        display: flex; gap: 6px; justify-content: center; margin-bottom: 24px;
+    }
+    .txt-boxmidreglo0201{
+        font-size: 16px; font-weight: 400; color: #6B7280;
+    }
+    .txt-boxmidreglo0202{
+        font-size: 16px;
+         cursor: pointer; 
+         font-weight: 500; color: #2BCC77; text-decoration: underline;
+    }
+    .boxbottreglo00{
+        display: flex; align-items: center; text-align: center; gap: 6px; justify-content: center; margin-bottom: 24px; flex-direction: column;
+    }
+    .txt-boxbottreglo00{
+        font-size: 16px; font-weight: 400; color: #6B7280;
+    }
+    .sub-boxbottreglo01{
+        font-size: 16px; 
+        font-weight: 500;
+        padding-right: 5px;
+        text-decoration: underline;
+        color: #2BCC77;
+        cursor: pointer;
+        display: flex;
+    }
+    .txt-sub-boxbottreglo01{
+        font-size: 16px; 
+        font-weight: 400; 
+        color: #6B7280;
+    }
+/* login by gmail css start */
+.boxmidloginbygmail00{
+    display: flex;
+    width: 93%; 
+    flex-direction: column
+ }
+ .txtmidloginbygmail00{
+    font-size: 24px;
+     font-weight: 500;
+     color: black;
+ }
+ .boxmidloginbygmail01{
+    width: 100%;
+    display: flex;
+  justify-content: space-between;
+      align-items: center;
+       margin-bottom: 12px;   
+ }
+ .sub-midloginbygmail00{
+        margin-bottom: 6px;
+        height: 70px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: end;
+        padding-bottom: 9px;
+        color: black;
+}
+.boxmidloginbygmail02{
+    display: flex; 
+    padding-bottom: 10px;   
+    width: 90%; 
+    flex-direction: column;
+
+}
+.input-box-v1-mo{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.input-title-text-mo{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom: 9px;
+    color: black;
+}
+.input-main-mo{
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size:16px;
+    outline: none;
+    color: black;
+    font-family: "Noto Sans Thai", sans-serif;
+    background-color: transparent;
+    
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #9CA3AF;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #9CA3AF;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #9CA3AF;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #9CA3AF;
+}
+::placeholder {
+    color: #9CA3AF;
+    opacity: 1; 
+}
+  
+::-ms-input-placeholder { 
+    color: #9CA3AF;
+}
+input[type=text] {
+    color: black;
+    background-color: transparent;
+    /*border: none;*/
+    font-family: "Noto Sans Thai", sans-serif;
+
+}
+::-ms-input-placeholder { 
+    color: #9CA3AF;
+}
+.input-frame-mo{
+    height: 26px;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    border: 1px solid  #E5E7EB;
+    display: flex;
+    font-family: "Noto Sans Thai", sans-serif;
+    justify-content: space-between;
+    background-color: white;
+}
+.input-description-text{
+    margin-top: 8px;
+    font-size: 13px;
+    color: #2BCC77;
+    text-align: end;
+}
+.eye-on{
+    width: 20px;
+    background-size: contain;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url(/assets/fontend/hax_theme/images/eye-view.webp);
+}
+.eye-off{
+    width: 20px;
+    background-size: contain;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url(/assets/fontend/hax_theme/images/eye-crossed.webp);
+}
+.btu-loginbygmail{
+    width: 352px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: 48px;
+    display: flex;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 100px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    background-color: #E5E7EB;
+    color: #9CA3AF;
+}
+.btu-loginbygmail-active{
+    background-color:  #2BCC77 !important;
+    color: white !important;
+    cursor: pointer;
+}
+.flex-center{
+    width: 100%; display: flex; align-items: center; justify-content: center;
+}
+.coverbtu-round{
+   cursor: pointer; 
+   height: 50px; 
+   width: 100%; 
+   display: flex; 
+   gap: 12px;
+   margin-bottom: 20px;
+   justify-content: center; 
+   align-items: center;
+}
+.btu-roundfb{
+    width: 48px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 48px;
+    cursor: pointer; 
+    border-radius: 100px;
+    background-color: #1877F2;
+}
+.btu-roundgg{
+    width: 48px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 48px;
+    cursor: pointer; 
+    border-radius: 100px;
+    background-color: white;
+    border: 1px solid #D1D5DB;
+}
+.btu-roundline{
+    width: 48px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 48px; 
+    border-radius: 100px;
+    background-color: #00C300;
+}
+.sizeimg-round{
+    width: 24px; height: 24px; object-fit: contain;
+}
+.input-description-text{
+    margin-top: 8px;
+    font-size: 13px;
+    color: black;
+}
+.input-double-box-mo{
+    display: flex;
+    gap: 16px;
+}
+.input-require-few-icon{
+    color: #F04438;
+    margin-left: 2px;
+    font-size: 16px;
+}
+
+/* login by gmail css end */
+/* reg by email start  */
+.sub-midinregbygmail00{
+    height: 30px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 22px;
+}
+.text-coverbottreg0300{
+font-size: 12px;
+color: #2BCC77;
+}
+.boxmidregbyemail002{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 90px;
+    text-align: left;
+}
+.sub-midloginbygmail01-line{
+    width: 29%;
+    height: 2px;
+    background-color: #D1D5DB;
+}
+.sub-text-midloginbygmail01-line{
+    font-size: 16px; font-weight: 400; color: #9CA3AF;
+}
+#showilginbysosocial{
+z-index: 3;
+}
+#showilginbygmail{
+z-index: 4;
+}
+#showRegisterbygmail  {
+z-index: 5;
+
+}
+/* reg by email end  */
+.content {
+  min-height:100%;
+  height:100%;
+  background:white;
+  position:relative;
+  z-index:0;
+  h1 {
+    padding:75px 0 30px 0;
+    text-align:center;
+    font-size:30px;
+    line-height:30px;
+  }
+  .buttons {
+    max-width:800px;
+    margin:0 auto;
+    padding:0;
+    text-align:center;
+    .button {
+      display:inline-block;
+      text-align:center;
+      padding:10px 15px;
+      margin:10px;
+      background:red;
+      font-size:18px;
+      background-color:#efefef;
+      border-radius:3px;
+      box-shadow:0 1px 2px rgba(0,0,0,.3);
+      cursor:pointer;
+      &:hover {
+        color:white;
+      }
+    }
+  } 
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+@keyframes unfoldOut {
+  0% {
+    transform:scaleY(1) scaleX(1);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(.005) scaleX(0);
+  }
+}
+@keyframes zoomIn {
+  0% {
+    transform:scale(0);
+  }
+  100% {
+    transform:scale(1);
+  }
+}
+@keyframes zoomOut {
+  0% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(0);
+  }
+}
+@keyframes quickScaleDown {
+  0% {
+    transform:scale(1);
+  }
+  99.9% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    background:rgba(0,0,0,.0);
+    opacity: 0;
+
+  }
+  100% {
+    background:rgba(0,0,0,.7);
+    opacity: 1;
+
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    background:rgba(0,0,0,.7);
+    opacity: 1;
+  }
+  100% {
+    background:rgba(0,0,0,.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sketchIn {
+	0% {
+		stroke-dashoffset: 778;
+	}
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes sketchOut {
+	0% {
+		stroke-dashoffset: 0;
+	}
+	100% {
+		stroke-dashoffset: 778;
+	}
+}
+
+@keyframes modalFadeIn {
+  0% {
+    background-color:transparent;
+  }
+  100% {
+    background-color:white;
+  }
+}
+
+@keyframes modalFadeOut {
+  0% {
+    background-color:white;
+  }
+  100% {
+    background-color:transparent;
+  }
+}
+
+@keyframes modalContentFadeIn {
+  0% {
+    opacity:0;
+    top:-20px;
+  }
+  100% {
+    opacity:1;
+    top:0;
+  }
+}
+
+@keyframes modalContentFadeOut {
+  0% {
+    opacity:1;
+    top:0px;
+  }
+  100% {
+    opacity:0;
+    top:-20px;
+  }
+}
+
+.txtbetweetline{
+  font-size: 20px; font-weight: 400; color: #9CA3AF;
+}
+
+  /* checkbox start */
+  .checkbox-login {
+    position: relative;
+    display: flex;
+    align-items: normal;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin-top: 10px;
+}
+
+.checkbox-login  input {
+    position: absolute;
+    width: 0;
+    left: 50px;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-login  .checkmark1-login {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border: 1px solid  #6B7280;
+}
+
+
+.checkbox-login :hover .checkmark1-login {
+    transition: all 0.2s ease;
+}
+
+.checkbox-login  input:checked ~.checkmark1-login {
+    background: #2BCC77;
+    border: 1px solid #2BCC77;
+
+}
+
+.checkbox-login  input[type="radio"] ~ .checkmark1-login {
+    border-radius: 50%;
+}
+
+.checkbox-login  .checkmark1-login::after {
+    position: absolute;
+    display: block;
+    content: "";
+    left: 50%;
+    top: 40%;
+    width: 4px;
+    height: 12px;
+    border: 1px solid  white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    -moz-transform: translate(-50%, -50%) rotate(45deg);
+    -ms-transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.checkbox-login  input:checked~.checkmark1-login::after {
+    opacity: 1;
+    transition: all 0.2s ease;
+    
+}
+
+.checkbox-login  input:disabled ~ .checkmark1-login {
+    background-color:  #6B7280;
+    border: 1px solid  #6B7280;
+}
+.checkbox-login  input:disabled ~ .checkmark1-login::after {
+    position: absolute;
+    display: block;
+    content: "";
+    left: 50%;
+    top: 40%;
+    border: solid  #6B7280;
+    width: 4px;
+    height: 12px;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    -moz-transform: translate(-50%, -50%) rotate(45deg);
+    -ms-transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+  /* checkbox end */
+.txtcoloridpermition{
+    font-size: 12px; color: black; font-weight: 400; width: 90%;
+}
+
+  
+
+/* Responsive Design */
+@media (max-width: 1920px){  
+   .modalcontentreglogin{
+       /* background-color: lightgray; */
+       padding: 0 30px;
+  } 
+   .sizenopd {
+    padding: 0 !important;
+  }
+  .modal-closereg{
+    width: 32px;
+    height: 32px; 
+    position: absolute;
+    top: 0;
+    right: 2px;
+    cursor: pointer !important;
+}
+  .modal-loginbysosocial {
+    .modal-background {
+      .modal {
+          width: calc(480px - 30px);
+      }
+    }
+  }
+  .txtbetweetline{
+    font-size: 16px;
+  }
+  .boxmidloginbygmail01{
+    margin-top: 5px;
+  }
+}
+@media (max-width: 1895px){   
+  .modal-loginbysosocial {
+    .modal-background {
+      .modal {
+        width: calc(480px - 30px);
+      }
+    }
+  }
+}
+@media (max-width: 1680px){  
+
+}
+@media (max-width: 1600px){
+
+}
+@media (max-width: 1512px){
+
+}
+@media (max-width: 1470px){
+
+}
+@media (max-width: 1440px){
+    .modal-loginbysosocial {
+        &.modal-background {
+            .modal {
+                width: 400px;
+                .txtcoverwelcom{
+                    height: 50px;
+                }
+                .coverbtureglogin-bl{
+                    height: 40px;
+                }
+                .coverbtureglogin-wh{
+                    height: 40px;
+                }
+                .coverbtureglogin-bl{
+                    height: 40px;
+                }
+                .coverlogologin{
+                    height: 70px;
+                    background-position: center;
+                }
+                .coverbtureglogin-green{
+                    height: 40px;
+                }
+                .btu-loginbygmail{
+                    margin-top: 5px;
+                    margin-bottom: 5;
+                    height: 40px;
+                }
+                .coverbtu-round{
+                    margin-bottom: 5px;
+                }
+                .sub-midloginbygmail00{
+                    height: 50px;
+                }
+              
+            }
+          
+        }
+        .txtbetweetline{
+          font-size: 14px ;
+        }
+        .txt-boxmidreglo0201{
+          font-size: 14px ;
+        }    
+        .txt-boxmidreglo0202{
+          font-size: 14px ;
+        } 
+        .txt-boxbottreglo00{
+          font-size: 14px ;
+        }
+        .txt-sub-boxbottreglo01{
+          font-size: 14px ;
+        }
+        .sub-boxbottreglo01{
+          font-size: 14px ;
+        }
+
+    }
+  
+ 
+}
+@media (max-width: 1280px){
+    .txtcoverwelcom{
+        height: 59px;
+    }
+    .modal-loginbysosocial {
+        &.modal-background {
+            .modal{
+                width: 450px;
+           }
+        }
+    }
+}
+
+@media (max-width: 1100px){
+    
+}
+@media (max-width: 1024px){
+  /* .modalcontentreglogin{
+    background-color: lightgray;
+  } */
+  .modal-background {
+    .modal {
+        width: 450px;
+
+    }
+  }
+}
+/* mobile */
+@media (max-width: 970px){
+  .modalcontentreglogin{
+    /* background-color: lightseagreen; */
+    padding: 0;
+  }
+  .modal-loginbysosocial {
+    & .modal-background {
+        .modal {
+          width: 450px;
+
+        }
+    }
+    .txtbetweetline{
+      font-size: 16px;
+    }
+}
+  .coverlogologin {
+    background-position: center;
+    height: 77px;
+  }
+  .txtcoverwelcom{
+    font-size: 20px;
+    height: 49px;
+  }
+  .txtmidloginbygmail00{
+    font-size: 20px;
+  }
+  .btu-loginbygmail {
+    margin-bottom: 7px;
+    font-size: 16px;
+  }
+  .coverbtu-round{
+    margin-bottom: 8px;
+  }
+
+  .sub-midloginbygmail00{
+    height: 50px;
+  }
+  .eye-off{
+    margin-top: 5px;
+    width: 16px;
+    height: 16px;
+  }
+  .eye-on{
+    margin-top: 5px;
+    width: 16px;
+    height: 16px;
+  }
+
+}
+@media (max-width: 600px){
+  /* .modalcontentreglogin{
+    background-color: aquamarine;
+
+  } */
+}
+@media (max-width: 520px){
+  /* .modalcontentreglogin{
+    background-color: royalblue;
+
+  } */
+}
+@media (max-width: 430px){
+  /* .modalcontentreglogin{
+    background-color: lightblue;
+
+  } */
+  .modal-loginbysosocial {
+    & .modal-background {
+        .modal {
+          width: 350px;
+
+        }
+    }
+    .input-title-text-mo {
+      font-size: 14px;
+    }
+    .input-frame-mo{
+      font-size: 14px;
+    }
+    .input-main-mo{
+      font-size: 14px;
+    }
+    .boxmidloginbygmail02{
+      padding-bottom: 0;
+    }
+}
+
+  .coverlogologin{
+    height: 50px;
+    background-position: center;
+  }
+  .txtcoverwelcom{
+    height: 40px;
+    font-size: 20px;
+  }
+  .txtmidloginbygmail00{
+    font-size: 20px;
+  }
+  .boxbottreglo00{
+    margin-bottom: 7px;
+  }
+  .sub-midloginbygmail00{
+    height: 50px;
+  }
+  .btu-loginbygmail{
+    height: 40px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .coverbtu-round{
+    margin-bottom: 7px;
+
+  }
+  .input-title-text-mo {
+    margin-bottom: 5px;
+  }
+  .txtbtureglogin-bl{
+    font-size: 12px;
+  }
+  .txt-boxbottreglo00{
+    font-size: 12px;
+  }
+  .sub-boxbottreglo01{
+    font-size: 12px;
+  }
+  .txt-sub-boxbottreglo01{
+    font-size: 14px;
+  }
+  .txtbetweetline{
+    font-size: 14px;
+  }
+  .txt-boxmidreglo0201{
+    font-size: 14px;
+  }
+  .txt-boxmidreglo0202{
+    font-size: 14px;
+  }
+  .txtbtureglogin-bl{
+    font-size: 12px;
+  }
+  .txt-boxbottreglo00{
+    font-size: 14px;
+  }
+  .txtbtureglogin-bl{
+    font-size: 14px;
+  }
+  .txtbtureglogin-wh{
+    font-size: 14px;
+  }
+  .sub-boxbottreglo01{
+    font-size: 14px;
+  }
+  .input-frame-mo{
+   padding: 6px 8px;
+  }
+  .eye-off{
+    width: 16px;
+    height: 16px;
+  }
+  .eye-on{
+    width: 16px;
+    height: 16px;
+  }
+}
+@media (max-width: 414px){
+  /* .modalcontentreglogin{
+    background-color: lightgoldenrodyellow;
+
+  } */
+  .modal-loginbysosocial {
+    & .modal-background {
+        .modal {
+            /* max-width: 80%; */
+            width: 300px;
+        }
+    }
+  }
+  .txtcoloridpermition{
+    font-size: 10px;
+  }
+  .txtmidloginbygmail00{
+    font-size: 18px;
+  }
+  .txtcoverwelcom{
+    font-size: 18px;
+  }
+  .input-title-text-mo {
+    font-size: 12px;
+  }
+  .input-main-mo {
+    font-size: 12px;
+  }
+  .txtbtureglogin-wh{
+    font-size: 12px;
+  }
+  .coverbtureglogin-bl{
+    font-size: 14px;
+  }
+  .coverbtureglogin-green{
+    font-size: 14px;
+  }
+  .txtbtureglogin-bl{
+    font-size: 12px;
+  }
+  .txt-boxbottreglo00{
+    font-size: 12px;
+  }
+  .sub-boxbottreglo01{
+    font-size: 12px;
+  }
+  .txt-sub-boxbottreglo01{
+    font-size: 12px;
+  }
+  .txtbetweetline{
+    font-size: 12px !important;
+  }
+  .txt-boxmidreglo0201{
+    font-size: 12px;
+  }
+  .txt-boxmidreglo0202{
+    font-size: 12px;
+  }
+  .btu-loginbygmail{
+    font-size: 12px;
+  }
+  .text-coverbottreg0300{
+    font-size: 10px;
+  }
+  .sub-text-midloginbygmail01-line{
+    font-size: 14px;
+  }
+  .btu-roundfb{
+    width: 40px;
+    height: 40px;
+  }
+  .btu-roundgg{
+    width: 40px;
+    height: 40px;
+  }
+  .btu-roundline{
+    width: 40px;
+    height: 40px;
+  }
+  .sub-midinregbygmail00{
+    margin-bottom: 8px;
+  }
+  .coverbtu-round{
+    margin-bottom: 4px;
+    margin-top: 4px;
+  }
+  .boxmidloginbygmail02{
+    padding-bottom: 0;
+  }
+  .boxmidloginbygmail01{
+    margin-bottom: 0;
+  }
+  .input-box-v1-mo {
+    margin-bottom: 5px;
+  }
+  .input-frame-mo{
+    padding:6px 8px;
+   }
+  .eye-off{
+    margin-top: 5px;
+    width: 16px;
+    height: 16px;
+  }
+  .eye-on{
+    margin-top: 5px;
+    width: 16px;
+    height: 16px;
+  }
+
+}

@@ -1,0 +1,96 @@
+### ===== ความลับ/ค่า Config (ห้ามหลุดขึ้น Git เด็ดขาด) =====
+.env
+.env.*
+!.env.example
+
+### ===== ไลบรารีที่ดาวน์โหลดมาอัตโนมัติ (ไม่ใช่โค้ดที่เขียนเอง) =====
+/vendor
+/node_modules
+composer.phar
+
+### ===== Laravel: แคช/ไฟล์ชั่วคราวที่สร้างอัตโนมัติตอนรันเว็บ (กันทั้งโฟลเดอร์) =====
+/bootstrap/cache/*.php
+!/bootstrap/cache/.gitkeep
+
+/storage/framework/*
+!/storage/framework/.gitkeep
+!/storage/framework/cache
+/storage/framework/cache/*
+!/storage/framework/cache/.gitkeep
+!/storage/framework/cache/data
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitkeep
+!/storage/framework/sessions
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+!/storage/framework/views
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+!/storage/framework/testing
+/storage/framework/testing/*
+!/storage/framework/testing/.gitkeep
+
+/storage/logs/*
+!/storage/logs/.gitkeep
+
+### ===== ไฟล์ที่ลูกค้า/แอดมินอัปโหลดผ่านหน้าเว็บ (ไม่ใช่โค้ด ไม่ควรอยู่ใน Git) =====
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+/public/storage
+/public/uploads
+
+### ===== ไฟล์ที่สร้างอัตโนมัติ ไม่ใช่โค้ดที่เขียนเอง =====
+sitemap.xml
+/public/hot
+/public/mix-manifest.json
+
+### ===== เครื่องมือ/IDE ส่วนตัว (ไม่เกี่ยวกับโค้ดโปรเจกต์) =====
+/.vscode
+/.idea
+*.sublime-project
+*.sublime-workspace
+
+### ===== ไฟล์ขยะจากระบบปฏิบัติการ =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+### ===== Key/Certificate ที่อาจหลุดมาโดยไม่ตั้งใจ =====
+*.pem
+*.key
+*.p12
+*.crt
+
+### ===== Backup/Archive ที่บางทีดาวน์โหลดมาทดสอบแล้วลืมลบ =====
+*.sql
+*.sql.gz
+*.zip
+*.tar.gz
+!/database/seeders/*.sql
+
+# กันไฟล์รูปทั้งหมด
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.svg
+*.ico
+*.bmp
+
+# ckeditor เก่า/สำรอง ไม่ใช้แล้ว
+/public/vendor/ckeditor4_old
+/public/vendor/ckeditor4_22
+
+# Third-party library / static asset ขนาดใหญ่ ไม่ใช่โค้ดที่เขียนเอง ไม่ต้องเก็บ
+/public/vendor
+/storage/fonts
+/git
+
+# กันไฟล์วิดีโอทั้งหมด (ไฟล์สาธิตสินค้า/โฆษณาที่แอดมินอัปโหลด ไม่ใช่โค้ด)
+*.mp4
+*.webm
+*.mov
+*.avi
+*.mkv
+cloudflared.log

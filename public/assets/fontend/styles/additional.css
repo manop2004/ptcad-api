@@ -1,0 +1,262 @@
+.blinking {
+	border: 10px solid #9ae2ff;
+	animation-name: blinking;
+	animation-duration: 1s;
+	animation-iteration-count: 10000;
+}
+@keyframes blinking {
+	50% {
+		border-color: #FFBB26;
+	}
+}
+
+.product-rating {
+	cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.stars i {
+    font-size: 18px; /* ปรับขนาดไอคอนดาว */
+    margin-right: 2px;
+}
+
+.full-star {
+    color: #FFD700; /* สีเหลืองทอง */
+}
+
+.half-star {
+    color: #FFD700; /* สีเหลืองทอง */
+    position: relative;
+}
+
+.empty-star {
+    color: #ccc; /* สีเทา */
+}
+
+.avg_rating-score{
+	font-size: 12px;
+    text-align: center;
+}
+
+.review-summary {
+    display: flex;
+    flex-wrap: wrap; /* ทำให้ไม่เกินขนาดของ container */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%; /* ป้องกันการล้น */
+}
+
+.full-star {
+    color: #FFD700;
+}
+
+.half-star {
+    color: #FFD700;
+}
+
+.empty-star {
+    color: #ccc;
+}
+
+.review-distribution {
+    width: 100%; /* ป้องกันการล้นขอบ */
+    max-width: 500px; /* จำกัดขนาดไม่ให้เกิน */
+}
+
+.review-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    width: 100%; /* ทำให้ bar ไม่เกินขอบ */
+	justify-content: center;
+}
+
+.bar {
+    flex-grow: 1; /* ทำให้ขยายได้ แต่ไม่เกิน */
+    max-width: 200px; /* ป้องกันการล้นขอบ */
+    height: 10px;
+    background: #ddd;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden; /* ป้องกันไม่ให้เส้นเกิน */
+}
+
+.fill {
+    height: 100%;
+    background: #FFD700;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out; /* ทำให้การขยายดูสวยขึ้น */
+}
+
+.review-header {
+	margin-top: 25px;
+}
+
+.review-stars {
+	margin-top: 10px;
+}
+.review-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #fff;
+}
+.review-item>p {
+	margin-top: 10px;
+}
+
+.review-thumbnail {
+    width: 120px; /* ขนาด thumbnail */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+.review-thumbnail:hover {
+    transform: scale(1.1);
+}
+.review-video-player {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 10px;
+}
+.video-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.video-wrapper:hover .play-icon {
+    opacity: 1;
+}
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+.review-media {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* ระยะห่างระหว่างรูปกับวิดีโอ */
+    flex-wrap: wrap; /* ถ้าหน้าจอแคบ จะให้มันขึ้นบรรทัดใหม่อัตโนมัติ */
+}
+.img-thumbnail {
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+}
+@media (min-width: 768px) {
+    .review-summary {
+        display: flex;
+        justify-content: center; /* จัดให้อยู่ตรงกลาง */
+        align-items: center; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+        gap: 20px; /* เพิ่มระยะห่างระหว่างสองส่วน */
+    }
+
+    .rating-score, .review-distribution {
+        flex: 1; /* ให้แต่ละส่วนขยายครึ่งหนึ่งของพื้นที่ */
+        text-align: center; /* จัดเนื้อหาให้อยู่กลาง */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .review-summary {
+        flex-direction: column; /* จัดเรียงแนวตั้ง */
+        align-items: center; /* จัดให้อยู่ตรงกลาง */
+        text-align: center;
+    }
+
+    .rating-score {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .review-distribution {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+/* ==== PTCAD Footer Redesign ==== */
+.pt-footer-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:32px 68px;background:#f7faff;border-top:1px solid #e6edf8}
+.pt-footer-badge{display:flex;align-items:center;gap:12px}
+.pt-footer-badge-icon{width:40px;height:40px}
+.pt-footer-badge-title{font-weight:700;font-size:14px;color:#102b76}
+.pt-footer-badge-sub{font-size:13px;color:#667085}
+
+.pt-footer{padding:46px 68px;background:#102b76;color:#fff;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:30px}
+.pt-footer h4{margin:0 0 14px;color:#fff;font-size:16px}
+.pt-footer-text,.pt-footer a{color:rgba(255,255,255,.72);font-size:14px;line-height:1.9;display:flex;align-items:center;gap:6px}
+.pt-footer-desc{color:rgba(255,255,255,.72);font-size:14px;line-height:1.7;margin:12px 0 20px}
+.pt-footer-logo-img{height:32px;margin-bottom:8px}
+.pt-footer-title{font-weight:700;margin:18px 0 8px}
+.pt-footer-social{display:flex;gap:10px;margin-top:16px}
+.pt-footer-social-icon{width:28px;height:28px}
+.pt-footer-copyright{text-align:center;padding:18px;background:#0c2260;color:rgba(255,255,255,.6);font-size:13px}
+
+@media(max-width:1100px){.pt-footer-badges,.pt-footer{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.pt-footer-badges,.pt-footer{grid-template-columns:1fr;padding:32px 22px}}
+/* ==== PTCAD Header/Nav Redesign ==== */
+.logowrapper{display:flex;align-items:center;overflow:visible}
+.logowrapper img.w-logo-subhead{height:36px;width:auto;max-width:none}
+
+.pt-nav-wrap{display:flex;align-items:center;flex:1;gap:24px;margin-left:24px}
+.pt-nav-menu{display:flex;align-items:center;gap:24px;flex-wrap:nowrap}
+.pt-nav-link{white-space:nowrap;font-weight:600;font-size:15px;color:#20315d}
+.pt-nav-link:hover{color:var(--blue,#1765ff)}
+
+.pt-nav-actions{display:flex;align-items:center;gap:14px;margin-left:auto}
+.pt-nav-search{display:flex;align-items:center;gap:8px;min-width:220px;height:40px;border:1px solid #e6edf8;border-radius:999px;padding:0 14px;color:#98a2b3;background:#fff}
+.pt-nav-search input{border:none;outline:none;background:transparent;font-size:14px;width:100%;font-family:inherit}
+
+.pt-nav-icon-btn{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#23345f;flex:none}
+.pt-nav-icon-btn:hover{background:#f6f9ff}
+.pt-nav-buy-btn{white-space:nowrap;height:42px;padding:0 22px;border-radius:12px;background:linear-gradient(135deg,#1765ff,#0d57df);color:#fff !important;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none}
+
+@media(max-width:1100px){
+  .pt-nav-menu{display:none}
+  .pt-nav-search{min-width:160px}
+}
+/* ==== PTCAD Topbar Redesign ==== */
+.head-home {
+  background: linear-gradient(135deg, #0c2c82, #1765ff) !important;
+  border-color: #1765ff !important;
+}
+
+.bg-filter-menu {
+  background: var(--blue, #1765ff) !important;
+}
+
+.line-head {
+  background: rgba(255,255,255,.2) !important;
+}
+
+.txt-phone a,
+.txt-help a,
+.txt-contact a {
+  color: #fff !important;
+}
+
+.txt-phone a:hover,
+.txt-help a:hover,
+.txt-contact a:hover {
+  color: #8fd3ff !important;
+}

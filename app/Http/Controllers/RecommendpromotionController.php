@@ -1,0 +1,237 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use App\Providers\RouteServiceProvider;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Storage;
+
+use App\Models\TbRecommendPromotion;
+
+class RecommendpromotionController extends Controller
+{
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+
+        $breadcrumb = [
+            ['name' => 'ตั้งค่ารายการแนะนำ'],
+        ];
+        $title_page = 'แนะนำโปรโมชั่น';
+        $count = TbRecommendPromotion::count();
+
+        return view('admin.recommendpromotion.main', [
+            'breadcrumb' => $breadcrumb,
+            'title_page' => $title_page,
+            'count' => $count,
+            'data' => '',
+        ]);
+
+    }
+
+    public function add(){
+
+        $breadcrumb = [
+            ['name' => 'เพิ่มโปรโมชั่นแนะนำ'],
+        ];
+        $title_page = 'แนะนำโปรโมชั่น';
+        $sort = TbRecommendPromotion::select('recommend_sort')->orderBy('recommend_sort','desc')->first();
+
+        return view('admin.recommendpromotion.form', [
+            'breadcrumb' => $breadcrumb,
+            'title_page' => $title_page,
+            'sort' => $sort,
+            'data' => '',
+        ]);
+
+    }
+
+    public function crate(Request $request){
+
+        $request->validate(
+            [
+                'recommend_thumb' => 'required',
+                
+            ],
+            [
+                'recommend_thumb.required' => 'กรุณาเลือกรูปภาพ',
+            ]
+        );
+
+        if($request->show == 'on'){
+            $show = 1;
+        }else{
+            $show = 2;
+        }
+
+        $data = new TbRecommendPromotion;
+        $data->recommend_link               = $request->recommend_link;
+        $data->recommend_note               = $request->recommend_note;
+        $data->recommend_sort               = $request->recommend_sort;
+        $data->show                         = $show;
+        $data->created_by                   = Auth::user()->displayname;
+        $data->updated_by                   = Auth::user()->displayname;
+        $data->created_at                   = date('Y-m-d H:i:s');
+        $data->updated_at                   = date('Y-m-d H:i:s');
+
+        if (!empty($request->recommend_thumb)) {
+
+            if ($request->hasFile('recommend_thumb')) {
+                @unlink(Storage::disk('public')->path('recommend/') . $request->recommend_thumb_old);
+
+                $newFilename = uniqid() . '.' . $request->recommend_thumb->extension();
+                $data->recommend_thumb = $newFilename;
+                $file = $request->file('recommend_thumb');
+                $file->move('storage/recommend/', $newFilename);
+            }
+
+        }
+
+        $data->save();
+
+        return redirect()->route('recommend.promotion.edit',[$data->id])->with('feedback', 'เพิ่มข้อมูลเรียบร้อยแล้ว!');
+
+    }
+
+    public function edit($id)
+    {
+        $breadcrumb = [
+            ['name' => 'อัพเดตโปรโมชั่นแนะนำ'],
+        ];
+        $title_page = 'แนะนำโปรโมชั่น';
+
+        $data = TbRecommendPromotion::findOrFail($id);
+        $sort = TbRecommendPromotion::select('recommend_sort')->orderBy('recommend_sort','desc')->first();
+
+        return view('admin.recommendpromotion.form', [
+            'breadcrumb' => $breadcrumb,
+            'title_page' => $title_page,
+            'sort' => $sort,
+            'data' => $data,
+        ]);
+    }
+
+    public function update(Request $request,$id){
+
+        if($request->show == 'on'){
+            $show = 1;
+        }else{
+            $show = 2;
+        }
+
+        $data = TbRecommendPromotion::findOrFail($id);
+        $data->recommend_link               = $request->recommend_link;
+        $data->recommend_note               = $request->recommend_note;
+        $data->recommend_sort               = $request->recommend_sort;
+        $data->show                         = $show;
+        $data->updated_by                   = Auth::user()->displayname;
+        $data->updated_at                   = date('Y-m-d H:i:s');
+
+        if (!empty($request->recommend_thumb)) {
+
+            if ($request->hasFile('recommend_thumb')) {
+                @unlink(Storage::disk('public')->path('recommend_thumb/') . $request->recommend_thumb_old);
+
+                $newFilename = uniqid() . '.' . $request->recommend_thumb->extension();
+                $data->recommend_thumb = $newFilename;
+                $file = $request->file('recommend_thumb');
+                $file->move('storage/recommend/', $newFilename);
+            }
+
+        }
+
+        $data->save();
+
+        return back()->with('feedback', 'อัพเดตข้อมูลเรียบร้อยแล้ว!');
+
+    }
+
+    public function status($id){
+
+        $data = TbRecommendPromotion::findOrFail($id);
+
+        if($data->show == 2){
+            $status = 1;
+        }elseif($data->show == 1) {
+            $status = 2;
+        }
+
+        $data->show                         = $status;
+        $data->updated_by                   = Auth::user()->displayname;
+        $data->updated_at                   = date('Y-m-d H:i:s');
+        $data->save();
+
+        return back()->with('feedback', 'อัพเดตข้อมูลเรียบร้อยแล้ว!');
+    }
+
+    public function delete(Request $request){
+
+        $check = TbRecommendPromotion::findOrFail($request->deleteId);
+        if(!empty($check)){
+            @unlink(Storage::disk('public')->path('recommend/') . $check->recommend_thumb);
+        }
+        TbRecommendPromotion::where('id', $request->deleteId)->delete();
+        return back()->with('feedback', 'ลบข้อมูลเรียบร้อยแล้ว!');
+
+    }
+
+    public function deleteImg(Request $request){
+
+        $check = TbRecommendPromotion::findOrfail($request->deleteId);
+        if (!empty($check->recommend_thumb)) {
+            @unlink(Storage::disk('public')->path('recommend/').$check->recommend_thumb);
+        }
+
+        $data = TbRecommendPromotion::findOrfail($request->deleteId);
+        $data->recommend_thumb              = null;
+        $data->save();
+
+        return back()->with('feedback', 'อัพเดตข้อมูลเรียบร้อยแล้ว!');
+
+    }
+
+
+    public function jsondata()
+    {
+
+        $data = TbRecommendPromotion::get();
+
+        return Datatables::of($data)
+                ->addColumn('recommend_name', function ($data) {
+
+                    if($data->recommend_thumb){
+                        return '<img style="max-width:200px;" src="'.asset('storage/recommend/' . $data->recommend_thumb).'" alt="" class="full-width">';
+                    }else{
+                        return '<img style="max-width:200px;" src="'.asset('images/default-img/no-img.jpg').'" alt="..." class="full-width" >';
+                    }
+                })
+                ->addColumn('recommend_sort', function ($data) {
+                    return $data->recommend_sort;
+                })
+                ->addColumn('show', function ($data) {
+                    return $data->show;
+                })
+                ->addColumn('updated', function ($data) {
+                    return $data->updated_by.'<br/>'.$data->updated_at;
+                })
+                ->addColumn('actions', function ($data) {
+                    $id = $data->id;
+                    $status = $data->show;
+                    $name = $data->recommend_note;
+                    return view('admin.recommendpromotion.button', compact('id','status','name'));
+                })
+                ->escapeColumns([])
+                ->addIndexColumn()
+                ->make(true);
+    }
+
+}

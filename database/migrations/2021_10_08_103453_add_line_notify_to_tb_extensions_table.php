@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddLineNotifyToTbExtensionsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('tb_extensions', function (Blueprint $table) {
+            $table->integer('ext_lineNotify_status')->default(2)->after('ext_captcha');
+            $table->string('ext_lineNotify')->nullable()->after('ext_lineNotify_status');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('tb_extensions', function (Blueprint $table) {
+            //
+        });
+    }
+}

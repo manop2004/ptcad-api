@@ -1,0 +1,433 @@
+html, body {height: 100%; /* ให้ html และ body สูงเต็มจอภาพไว้ก่อน */}
+body{
+    max-width: 1160px;
+    margin: 0 auto !important;
+}
+
+body,h1,h2,h3,h4,h5,h6{
+    color: #0a2955 !important;
+}
+
+.font-12{
+    font-size: 12px !important;
+}
+.font-24{
+    font-size: 24px !important;
+}
+#primary-menu ul li > a {
+    font-size: 16px;
+}
+.content-wrap {
+    padding: 0 0 !important;
+}
+.full-width{
+    width: 100% !important;
+    height: auto !important;
+}
+.relative{
+    position: relative;
+}
+.mockup_video{
+    width: 385px;
+    height: 224px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+.mockup_video .ifram-video,
+.mockup_video .ifram-video-website{
+    position: absolute;
+    top: 10px;
+    left: 45px;
+}
+.mockup_video .ifram-video .fluid-width-video-wrapper iframe,
+.fluid-width-video-wrapper object,
+.fluid-width-video-wrapper embed,
+.mockup_video .ifram-video-website {
+    width: 300px;
+    height: 190px;
+}
+
+#block_1 {
+    background-color: #eeeff1;
+}
+#block_1 .block_contact{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.call_desktop{
+    width: 100%;
+    max-width: 300px;
+}
+.line_desktop{
+    width: 100%;
+    max-width: 250px;
+}
+.call_mobile{
+    width: 100%;
+    max-width: 160px;
+}
+
+
+.gstarcad_vs_content{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#block_3,#block_5,#block_8 {
+    background-color: #cdd0e8;
+}
+#block_3,#block_4,#block_5,#block_6 {
+    padding-left: 18rem ;
+    padding-right: 18rem ;
+    padding-top: 8rem ;
+    padding-bottom: 8rem ;
+}
+
+.block_6_ul .check-list{
+    list-style-image: url('/onepages/gstarcad/images/promotion-v2/icon-checked.png') !important;
+    background-size: contain;
+    background-position: bottom;
+    padding: 0 0 0 10px !important;
+}
+.block_6_ul .check-list li{
+    margin-bottom: 10px;
+}
+.font-st{
+    font-size: 10px;
+}
+.btn-contact-line{
+    padding: 10px 30px 10px 30px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 3px 0 rgb(0 0 0 / 16%);
+    background-color: #363982;
+    font-size: 26px;
+    color: #fff;
+}
+
+
+@media only screen and (max-width:419px) {
+    #block_2,#block_3,#block_4,#block_5,#block_8{
+        padding-left: 1rem ;
+        padding-right: 1rem ;
+        padding-top: 2rem ;
+        padding-bottom: 2rem ;
+    }
+    #block_3,#block_4,#block_5,#block_6,#block_7,#block_8 {
+        padding-left: 1rem ;
+        padding-right: 1rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    #block_6 {
+        padding-bottom: 0rem !important;
+    }
+    #block_8 {
+        padding-bottom: 1rem !important;
+    }
+    .block_3_head,.block_4_head{
+        text-align: center;
+    }
+    .block_4_head{
+        margin-top: 20px;
+    }
+    .block_3_video{
+        text-align: center;
+    }
+    .mockup_video{
+        width: 300px;
+        height: 175px;
+    }
+    .mockup_video .ifram-video{
+        position: absolute;
+        top: 9px;
+        left: 33px;
+    }
+    .mockup_video .ifram-video-website{
+        position: absolute;
+        top: 9px;
+        left: 0px;
+    }
+    .mockup_video .ifram-video .fluid-width-video-wrapper iframe,
+    .fluid-width-video-wrapper object,
+    .fluid-width-video-wrapper embed,
+    .mockup_video .ifram-video-website iframe {
+        width: 235px;
+        height: 147px;
+    }
+    .block_6_img,.block_6_ul{
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+    .block_6_ul{
+        margin-left: 10px;
+        padding-bottom: 0px !important;
+    }
+    .block_6_ul ul.check-list li{
+        padding: 0 0 0 0px !important;
+    }
+    .width-review{
+        max-width: 300px;
+    }
+    .gstarcad_vs_head{
+        width: 100%;
+        max-width: 200px;
+    }
+
+}
+
+@media only screen and (min-width: 420px) and (max-width:575px) {
+    #block_2,#block_3,#block_4,#block_5,#block_8{
+        padding-left: 1rem ;
+        padding-right: 1rem ;
+        padding-top: 2rem ;
+        padding-bottom: 2rem ;
+    }
+    #block_3,#block_4,#block_5,#block_6,#block_7,#block_8 {
+        padding-left: 3rem ;
+        padding-right: 3rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    #block_6 {
+        padding-bottom: 0rem !important;
+    }
+    #block_8 {
+        padding-bottom: 1rem !important;
+    }
+    .block_3_head,.block_4_head{
+        text-align: center;
+    }
+    .block_4_head{
+        margin-top: 20px;
+    }
+    .block_3_video{
+        text-align: center;
+    }
+    .mockup_video{
+        width: 300px;
+        height: 175px;
+    }
+    .mockup_video .ifram-video{
+        position: absolute;
+        top: 9px;
+        left: 33px;
+    }
+    .mockup_video .ifram-video-website{
+        position: absolute;
+        top: 9px;
+        left: 0px;
+    }
+    .mockup_video .ifram-video .fluid-width-video-wrapper iframe,
+    .fluid-width-video-wrapper object,
+    .fluid-width-video-wrapper embed,
+    .mockup_video .ifram-video-website iframe {
+        width: 235px;
+        height: 147px;
+    }
+    .block_6_img,.block_6_ul{
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+    .block_6_ul{
+        margin-left: 20px;
+    }
+    .width-review{
+        max-width: 300px;
+    }
+    .gstarcad_vs_head{
+        width: 100%;
+        max-width: 250px;
+    }
+
+}
+
+@media only screen and (min-width: 576px) and (max-width:767px) {
+    #block_2,#block_3,#block_4,#block_5,#block_8{
+        padding-left: 1rem ;
+        padding-right: 1rem ;
+        padding-top: 2rem ;
+        padding-bottom: 2rem ;
+    }
+    #block_3,#block_4,#block_5,#block_6,#block_7,#block_8 {
+        padding-left: 6rem ;
+        padding-right: 6rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    #block_6 {
+        padding-bottom: 0rem !important;
+    }
+    #block_8 {
+        padding-bottom: 1rem !important;
+    }
+    .block_3_head,.block_4_head{
+        text-align: center;
+    }
+    .block_4_head{
+        margin-top: 20px;
+    }
+    .block_3_video{
+        text-align: center;
+    }
+    .mockup_video .ifram-video{
+        position: absolute;
+        top: 10px;
+        left: 43px;
+    }
+    .mockup_video .ifram-video .fluid-width-video-wrapper iframe, .fluid-width-video-wrapper object, .fluid-width-video-wrapper embed {
+        width: 300px;
+        height: 190px;
+    }
+    .block_6_img,.block_6_ul{
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+    .width-review{
+        max-width: 300px;
+    }
+    .gstarcad_vs_head{
+        width: 100%;
+        max-width: 350px;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width:991px) {
+    #block_2,#block_3,#block_4,#block_5,#block_8{
+        padding-left: 1rem ;
+        padding-right: 1rem ;
+        padding-top: 2rem ;
+        padding-bottom: 2rem ;
+    }
+    #block_3,#block_4,#block_5,#block_6,#block_7,#block_8 {
+        padding-left: 10rem ;
+        padding-right: 10rem ;
+        padding-top: 8rem ;
+        padding-bottom: 8rem ;
+    }
+    #block_6 {
+        padding-bottom: 0rem !important;
+    }
+    #block_8 {
+        padding-bottom: 1rem !important;
+    }
+    .block_3_head,.block_4_head{
+        text-align: center;
+    }
+    .block_4_head{
+        margin-top: 20px;
+    }
+    .block_3_video{
+        text-align: center;
+    }
+    .mockup_video .ifram-video{
+        position: absolute;
+        top: 10px;
+        left: 43px;
+    }
+    .mockup_video .ifram-video .fluid-width-video-wrapper iframe,
+    .fluid-width-video-wrapper object, .fluid-width-video-wrapper embed
+     {
+        width: 300px;
+        height: 190px;
+    }
+    .block_6_img,.block_6_ul{
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+    #block_7{
+        padding-left: 2rem ;
+        padding-right: 2rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    .gstarcad_vs_head{
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width:1199px) {
+
+    #block_2,#block_3,#block_4,#block_5,#block_8{
+        padding-left: 1rem ;
+        padding-right: 1rem ;
+        padding-top: 2rem ;
+        padding-bottom: 2rem ;
+    }
+    #block_3,#block_4,#block_5,#block_8{
+        padding-left: 10rem ;
+        padding-right: 10rem ;
+        padding-top: 8rem ;
+        padding-bottom: 8rem ;
+    }
+    #block_6 {
+        padding-bottom: 0rem !important;
+    }
+    #block_8 {
+        padding-bottom: 1rem !important;
+    }
+    #block_6{
+        padding-left: 10rem ;
+        padding-right: 10rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    .block_6_img,.block_6_ul{
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    #block_7{
+        padding-left: 2rem ;
+        padding-right: 2rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    .gstarcad_vs_head{
+        width: 100%;
+        max-width: 400px;
+    }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+    #block_3,#block_4,#block_5,#block_8{
+        padding-left: 18rem ;
+        padding-right: 18rem ;
+        padding-top: 8rem ;
+        padding-bottom: 8rem ;
+    }
+    #block_6 {
+        padding-bottom: 0rem !important;
+    }
+    #block_8 {
+        padding-bottom: 10px !important;
+    }
+    #block_6{
+        padding-left: 10rem ;
+        padding-right: 10rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    #block_7{
+        padding-left: 2rem ;
+        padding-right: 2rem ;
+        padding-top: 4rem ;
+        padding-bottom: 4rem ;
+    }
+    .block_6_img,.block_6_ul{
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .gstarcad_vs_head{
+        width: 100%;
+        max-width: 400px;
+    }
+
+}

@@ -1,0 +1,222 @@
+
+@media only screen and (min-width: 1200px) {
+	.block-menu-tel{
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		padding: 10px;
+		box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
+		color: #737373;
+	}
+}
+
+@media only screen and (max-width: 1199px) {
+	#primary-menu-trigger {
+		left: unset !important;
+		right: 0;
+	}
+	.icon-tel-menu{
+		position: absolute;
+		right: 35px;
+		top: 36px;
+		height: 14px !important;
+		width: 14px !important;
+	}
+	#header-wrap .container{
+		width: 100% !important;
+	}
+}
+
+
+.full-width{ 
+	width: 100% !important;
+	height: auto !important;
+}
+.content-wrap {
+    padding-bottom: 0 !important;
+}
+.icon-tel-menu{
+	width: 17px;
+    height: 17px;
+    margin-right: 10px;
+	display: inline-block;
+}
+.content-tel-menu{
+	display: inline-block;
+	font-size: 14px;
+}
+
+#primary-menu ul li > a {
+    font-size: 14px !important;
+}
+
+#logo {
+    margin-right: 20px !important;
+}
+
+.co-0391df { color: #0391df !important; }
+.co-fff { color: #fff !important; }
+.co-fcc841 { color: #fcc841; }
+.co-737373 { color: #737373; }
+
+.bg-f3f3f3 {
+	background-color: #f3f3f3;
+}
+
+.content-wrap{
+	padding-top: 0px !important;
+}
+
+#block-slider{
+	background-image: url('/onepages/extraxion/images/background/bg-slider.webp');
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+    overflow: visible;
+	padding-top: 10rem;
+	padding-bottom: 10rem;
+}
+@media only screen and (max-width: 991px) {
+	.slider-padding-top{
+		padding-top: 30px;
+	}
+}
+
+.padding-block{
+	padding-top: 4rem;
+	padding-bottom: 4rem;
+}
+
+#block-02 .bg-block {
+	border-radius: 44px;
+	border: solid 1px #707070;
+	background-color: #005881;
+}
+#block-02 .position{
+	position: absolute;
+	left: -1px;
+    top: -1px;
+	max-width: 856px;
+}
+#block-02 .padding-quotation{
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+	padding-left: 3rem;
+	padding-right: 3rem;
+}
+#block-02 .btn-quotation{
+	background-image: url('/onepages/extraxion/images/button-quotation.webp');
+    width: 220px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: visible;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#block-03 .tab-nav{
+	display: flex;
+    justify-content: center;
+}
+#block-03 ul.tab-nav.tab-nav2 li {
+    margin-left: 0px !important;
+}
+#block-03 ul.tab-nav li.bl-extraxion-2d a{
+	border-top-left-radius: 10px !important;
+	border-bottom-left-radius: 10px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+#block-03 ul.tab-nav li.bl-extraxion-rebars a{
+	border-top-left-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-top-right-radius: 10px !important;
+	border-bottom-right-radius: 10px !important;
+}
+#block-03 ul.tab-nav.tab-nav2 li.ui-state-active a{
+	background-color: transparent !important;
+	color: #000 !important;
+	border: solid 2px #ccc !important;
+	box-shadow: unset !important;
+	font-size: 16px !important;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+#block-03 ul.tab-nav.tab-nav2 li a {
+    background-color: transparent !important;
+	border: solid 2px #e6e5e5 !important;
+	box-shadow: unset !important;
+	font-size: 16px !important;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+#block-03 .border-bottom-2d:after {
+    content: '';
+    display: block;
+    width: 140px;
+    border-top: 2px solid #444;
+    margin: 0px auto 25px auto;
+}
+#block-03 .border-bottom-rebars:after {
+    content: '';
+    display: block;
+    width: 190px;
+    border-top: 2px solid #444;
+    margin: 0px auto 25px auto;
+}
+
+#block-03 .videoblock{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+}
+#block-03 .tab-container {
+    padding: 0 !important;
+}
+@media only screen and (max-width: 767px) {
+	#block-03 ul.tab-nav.tab-nav2 li.ui-state-active a{
+		font-size: 14px !important;
+	}
+	#block-03 ul.tab-nav.tab-nav2 li a {
+		font-size: 14px !important;
+	}
+}
+
+
+#footer {
+    background-color: transparent !important;
+    border-top: transparent !important;
+	padding-bottom: 10px;
+}
+.icon-contact-ft{
+	height: 15px;
+	width: auto;
+	margin: 5px;
+}
+@media only screen and (max-width: 1199px) {
+	#footer .container{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+		width: 100% !important;
+	}
+}
+
+
+.slider-item-1,.slider-item-2,.slider-item-3,.slider-item-4, .slider-item-5,
+.slider-item-6, .slider-item-7, .slider-item-8, .slider-item-9, .slider-item-10, .slider-item-11{ 
+	display: flex;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.slider-item-1,.slider-item-2, .slider-item-4, .slider-item-5,.slider-item-11{ max-width: 555px; }
+.slider-item-3{ max-width: 165px; }
+.slider-item-6, .slider-item-7, .slider-item-8, .slider-item-9, .slider-item-10{ max-width: 360px;}
