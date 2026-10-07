@@ -23,11 +23,13 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configure Apache DocumentRoot to /public
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-RUN a2enmod rewrite
+# Configure Apache DocumentRoot to /public and dynamic port
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+ENV PORT=80
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && sed -ri -e 's/80/${PORT}/g' /etc/apache2/sites-available/*.conf /etc/apache2/ports.conf \
+    && a2enmod rewrite
 
 # Copy project files
 COPY . /var/www/html
@@ -38,9 +40,6 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-pl
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Expose port
-EXPOSE 80
 
 # Start script
 CMD php artisan storage:link && apache2-foreground
