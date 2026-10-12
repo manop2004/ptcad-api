@@ -26,29 +26,86 @@ class BotnoiLicenseController extends Controller
             'method' => $request->method(),
         ]);
 
-        $search = trim($request->input('search') ?? $request->input('email') ?? $request->input('tel') ?? $request->input('phone') ?? $request->input('serial') ?? $request->input('order_number') ?? '');
+        $inputSearch = trim($request->input('search') ?? '');
+        $inputTel = trim($request->input('tel') ?? $request->input('phone') ?? '');
+        $inputEmail = trim($request->input('email') ?? '');
 
-        if (empty($search)) {
+        // กรณีเป็นตัวแปร template หรือค่าว่าง
+        if (empty($inputSearch) && empty($inputTel) && empty($inputEmail)) {
             return response()->json([
                 'status'  => 'ready',
                 'found'   => false,
                 'count'   => 0,
-                'message' => 'กรุณาระบุอีเมล เบอร์โทรศัพท์ หรือ Serial Number ที่ต้องการค้นหา',
+                'message' => 'กรุณากรอกทั้งเบอร์โทรศัพท์และอีเมลที่ใช้สั่งซื้อ เพื่อตรวจสอบข้อมูล License ครับ',
                 'licenses' => [],
             ], 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
-        // 1. ค้นหา User จาก Email, Tel หรือ user_code
-        $users = User::where('email', $search)
-            ->orWhere('tel', $search)
-            ->orWhere('user_code', $search)
+        // ดึง Email และ Phone จาก input
+        $email = $inputEmail;
+        $phone = $inputTel;
+
+        // แยก Email และ Phone จาก search query ถ้าไม่ได้แยกส่งมา
+        if (!empty($inputSearch) && (empty($email) || empty($phone))) {
+            // ค้นหา email ด้วย regex
+            if (preg_match('/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/', $inputSearch, $matches)) {
+                $email = $matches[0];
+            }
+            // ค้นหาเบอร์โทร 9-10 หลัก
+            if (preg_match('/(0[0-9]{8,9})/', preg_replace('/[^0-9]/', '', $inputSearch), $matchesPhone)) {
+                $phone = $matchesPhone[0];
+            }
+        }
+
+        // ตรวจสอบความปลอดภัย: ต้องมีทั้งเบอร์โทรและอีเมล
+        if (empty($email) || empty($phone)) {
+            if (empty($email) && !empty($phone)) {
+                $msg = "ระบบได้รับเบอร์โทรศัพท์ ({$phone}) แล้วครับ\n🔒 เพื่อความปลอดภัย กรุณาพิมพ์:\n\nเช็ค license {$phone} อีเมลของคุณ\n\n(ตัวอย่างเช่น: เช็ค license {$phone} user@gmail.com)";
+            } elseif (!empty($email) && empty($phone)) {
+                $msg = "ระบบได้รับอีเมล ({$email}) แล้วครับ\n🔒 เพื่อความปลอดภัย กรุณาพิมพ์:\n\nเช็ค license เบอร์โทรของคุณ {$email}\n\n(ตัวอย่างเช่น: เช็ค license 08XXXXXXXX {$email})";
+            } else {
+                $msg = "🔒 เพื่อความปลอดภัย กรุณาพิมพ์ทั้งเบอร์โทรศัพท์และอีเมลคู่กันครับ\n\n(ตัวอย่างเช่น: เช็ค license 0998889999 user@gmail.com)";
+            }
+
+            return response()->json([
+                'status'  => 'incomplete_info',
+                'found'   => false,
+                'count'   => 0,
+                'message' => $msg,
+                'licenses' => [],
+            ], 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
+
+        // คลีนเบอร์โทร
+        $cleanPhone = preg_replace('/[^0-9]/', '', $phone);
+        if (str_starts_with($cleanPhone, '66') && strlen($cleanPhone) == 11) {
+            $cleanPhone = '0' . substr($cleanPhone, 2);
+        }
+
+        // 1. ค้นหา User ที่ตรง "ทั้งอีเมลและเบอร์โทร" พร้อมกันเท่านั้น
+        $users = User::where('email', $email)
+            ->where(function ($q) use ($cleanPhone, $phone) {
+                $q->where('tel', $phone)
+                  ->orWhere('tel', $cleanPhone)
+                  ->orWhereRaw("REPLACE(REPLACE(REPLACE(tel, '-', ''), ' ', ''), '+66', '0') = ?", [$cleanPhone]);
+            })
             ->get();
+
+        if ($users->isEmpty()) {
+            return response()->json([
+                'status'   => 'not_found',
+                'found'    => false,
+                'count'    => 0,
+                'message'  => "ไม่พบข้อมูลผู้ใช้งานที่ตรงกับทั้งเบอร์โทร {$phone} และอีเมล {$email}\nกรุณาตรวจสอบความถูกต้องอีกครั้งครับ",
+                'licenses' => [],
+            ], 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
 
         $userIds = $users->pluck('id')->toArray();
         $userCodes = $users->pluck('user_code')->toArray();
 
         // 2. ดึง License จาก TbSoftwareNotify (PTCAD License)
-        $softwareQuery = TbSoftwareNotify::query()
+        $softwares = TbSoftwareNotify::query()
             ->leftJoin('tb_product_detail', 'tb_product_detail.detail_sku', '=', 'tb_software_notify.productCode')
             ->leftJoin('tb_product', 'tb_product.id', '=', 'tb_product_detail.proId')
             ->select(
@@ -58,21 +115,12 @@ class BotnoiLicenseController extends Controller
                 'tb_product.pro_installer',
                 'tb_product.pro_activation_guide'
             )
-            ->where('tb_software_notify.show', 1);
-
-        if (!empty($userIds)) {
-            $softwareQuery->where(function($q) use ($userIds, $search) {
-                $q->whereIn('tb_software_notify.userId', $userIds)
-                  ->orWhere('tb_software_notify.serial_number', $search);
-            });
-        } else {
-            $softwareQuery->where('tb_software_notify.serial_number', $search);
-        }
-
-        $softwares = $softwareQuery->get();
+            ->where('tb_software_notify.show', 1)
+            ->whereIn('tb_software_notify.userId', $userIds)
+            ->get();
 
         // 3. ดึง License จาก LicenseKeyStock (Civil ProMax)
-        $civilQuery = LicenseKeyStock::query()
+        $civilLicenses = LicenseKeyStock::query()
             ->join('tb_order', 'tb_order.id', '=', 'tb_license_key_stock.orderId')
             ->leftJoin('tb_product_detail', 'tb_product_detail.detail_sku', '=', 'tb_license_key_stock.detail_sku')
             ->leftJoin('tb_product', 'tb_product.id', '=', 'tb_product_detail.proId')
@@ -83,22 +131,9 @@ class BotnoiLicenseController extends Controller
                 'tb_product.pro_installer',
                 'tb_product.pro_activation_guide'
             )
-            ->where('tb_license_key_stock.status', LicenseKeyStock::STATUS_USED);
-
-        if (!empty($userCodes)) {
-            $civilQuery->where(function($q) use ($userCodes, $search) {
-                $q->whereIn('tb_order.userCode', $userCodes)
-                  ->orWhere('tb_license_key_stock.license_key', $search)
-                  ->orWhere('tb_order.orderNumber', $search);
-            });
-        } else {
-            $civilQuery->where(function($q) use ($search) {
-                $q->where('tb_license_key_stock.license_key', $search)
-                  ->orWhere('tb_order.orderNumber', $search);
-            });
-        }
-
-        $civilLicenses = $civilQuery->get();
+            ->where('tb_license_key_stock.status', LicenseKeyStock::STATUS_USED)
+            ->whereIn('tb_order.userCode', $userCodes)
+            ->get();
 
         // 4. รวบรวมข้อมูล License ทั้งหมด
         $licenseList = [];
@@ -152,9 +187,9 @@ class BotnoiLicenseController extends Controller
                 'status'   => 'not_found',
                 'found'    => false,
                 'count'    => 0,
-                'message'  => "ไม่พบข้อมูล License สำหรับ \"{$search}\" กรุณาตรวจสอบอีเมลหรือเบอร์โทรศัพท์ที่ใช้สั่งซื้ออีกครั้งครับ",
+                'message'  => "ไม่พบข้อมูล License สำหรับเบอร์ {$phone} และอีเมล {$email}\nกรุณาตรวจสอบว่าข้อมูลทั้งสองถูกต้องตรงกับที่ใช้สั่งซื้อหรือไม่ครับ",
                 'licenses' => [],
-            ], 200);
+            ], 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
         // จัดรูปแบบข้อความสรุปสำหรับแชทบอทตอบลูกค้า
