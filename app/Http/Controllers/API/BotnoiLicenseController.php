@@ -192,28 +192,42 @@ class BotnoiLicenseController extends Controller
             ], 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
+        // ลิงก์หน้าดู License ตรงโปรดักที่ซื้อแล้ว (My Products / ซอฟต์แวร์ของฉัน)
+        $baseUrl = env('SITE_URL', env('APP_URL', 'http://localhost:8000'));
+        if (str_contains($baseUrl, 'Ptcad-.test')) {
+            $baseUrl = 'http://localhost:8000';
+        }
+        $myProductUrl = rtrim($baseUrl, '/') . '/account/software';
+
         // จัดรูปแบบข้อความสรุปสำหรับแชทบอทตอบลูกค้า
         $summaryLines = ["พบ License ทั้งหมด {$count} รายการ:"];
         foreach ($licenseList as $index => $item) {
             $no = $index + 1;
-            $summaryLines[] = "{$no}. {$item['product_name']}\n   • Serial: {$item['serial_number']}\n   • สถานะ: {$item['status_th']}\n   • วันหมดอายุ: {$item['date_exp']}";
+            $line = "{$no}. {$item['product_name']}\n   • Serial: {$item['serial_number']}\n   • สถานะ: {$item['status_th']}\n   • วันหมดอายุ: {$item['date_exp']}";
+            if (!empty($item['download_url'])) {
+                $line .= "\n   • ลิงก์ดาวน์โหลด: {$item['download_url']}";
+            }
+            $summaryLines[] = $line;
         }
+
+        $summaryLines[] = "👉 แนะนำ: คุณสามารถคลิกดูรายละเอียด License ทั้งหมดและดาวน์โหลดโปรแกรมได้ที่หน้า My Products (ซอฟต์แวร์ของฉัน):\n🔗 {$myProductUrl}";
 
         $botMessage = implode("\n\n", $summaryLines);
 
         $matchedUser = $users->first();
 
         return response()->json([
-            'status'   => 'success',
-            'found'    => true,
-            'count'    => $count,
-            'user'     => $matchedUser ? [
+            'status'         => 'success',
+            'found'          => true,
+            'count'          => $count,
+            'my_product_url' => $myProductUrl,
+            'user'           => $matchedUser ? [
                 'name'  => trim(($matchedUser->name ?? '') . ' ' . ($matchedUser->lastname ?? '')),
                 'email' => $matchedUser->email,
                 'tel'   => $matchedUser->tel,
             ] : null,
-            'message'  => $botMessage,
-            'licenses' => $licenseList,
+            'message'        => $botMessage,
+            'licenses'       => $licenseList,
         ], 200, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
